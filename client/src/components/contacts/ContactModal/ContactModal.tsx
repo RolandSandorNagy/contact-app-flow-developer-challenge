@@ -81,7 +81,7 @@ export function ContactModal({
           <AvatarPicker
             avatar={avatar}
             disabled={isSubmitting}
-            allowRemove={mode === "edit"}
+            allowRemove={true}
             onChange={setAvatar}
           />
         </div>
