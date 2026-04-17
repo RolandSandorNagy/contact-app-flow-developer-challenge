@@ -111,6 +111,14 @@ function App() {
         </div>
 
         <div className={styles.headerCenterCell}>
+          <span className={styles.mobileBackIcon} aria-hidden="true">
+            <img
+              src={backArrowIcon}
+              alt=""
+              className={`${styles.headerIconImage} ${styles.backIconImage}`}
+            />
+          </span>
+
           <h1 className={styles.title}>Contacts</h1>
 
           <div className={styles.headerControlsBox}>
@@ -124,6 +132,13 @@ function App() {
               </span>
               <span className={styles.headerAvatar} aria-hidden="true">
                 <img src={headerProfileImage} alt="" className={styles.headerAvatarImage} />
+              </span>
+              <span className={`${styles.headerIcon} ${styles.mobileOnlyLightIcon}`} aria-hidden="true">
+                <img
+                  src={lightModeIcon}
+                  alt=""
+                  className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
+                />
               </span>
             </div>
 
