@@ -31,8 +31,6 @@
   background: transparent;
   border-color: transparent;
   color: var(--fg-100);
-  font-size: var(--h3-size);
-  line-height: var(--h3-line);
 }
 
 .cancelButton:hover:not(:disabled) {
@@ -44,8 +42,6 @@
   min-height: var(--size-control-md);
   padding: 0 1.15rem;
   border-radius: var(--radius-control);
-  font-size: var(--h3-size);
-  line-height: var(--h3-line);
   border: none;
   border-color: transparent;
 }

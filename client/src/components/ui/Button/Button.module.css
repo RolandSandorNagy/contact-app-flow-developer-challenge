@@ -5,8 +5,9 @@
   gap: 8px;
   border: 1px solid transparent;
   border-radius: var(--radius-control);
-  font-size: var(--body-size);
-  line-height: var(--body-line);
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 100%;
   letter-spacing: var(--body-letter);
   font-weight: var(--body-weight);
   min-height: var(--size-control-md);
