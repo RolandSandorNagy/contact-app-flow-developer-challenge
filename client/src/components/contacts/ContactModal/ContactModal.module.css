@@ -1,11 +1,11 @@
 .form {
   display: grid;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .section {
   display: grid;
-  gap: 0.46rem;
+  gap: 0;
 }
 
 .avatarSection {
@@ -13,7 +13,7 @@
 }
 
 .fieldInput {
-  min-height: var(--size-control-lg);
+  min-height: var(--size-control-md);
   border-radius: var(--radius-control);
 }
 
