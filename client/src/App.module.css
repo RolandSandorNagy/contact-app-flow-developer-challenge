@@ -266,6 +266,10 @@
   letter-spacing: 0;
 }
 
+.addButtonMotion {
+  display: inline-flex;
+}
+
 .addPlus {
   width: 24px;
   height: 24px;
@@ -422,10 +426,13 @@
     height: 24px;
   }
 
-  .addButton {
+  .addButtonMotion {
     grid-column: 2;
     grid-row: 2;
     justify-self: end;
+  }
+
+  .addButton {
     min-height: 38px;
     min-width: 38px;
     width: 38px;

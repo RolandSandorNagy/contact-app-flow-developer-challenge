@@ -1,4 +1,5 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "../../ui/Button/Button";
 import { Input } from "../../ui/Input/Input";
 import { Modal } from "../../ui/Modal/Modal";
@@ -30,6 +31,7 @@ export function ContactModal({
   onClose,
   onSubmit
 }: ContactModalProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -67,6 +69,24 @@ export function ContactModal({
   };
 
   const title = mode === "add" ? "Add contact" : "Edit contact";
+  const containerVariants = shouldReduceMotion
+    ? undefined
+    : {
+        hidden: {},
+        visible: {
+          transition: {
+            staggerChildren: 0.035,
+            delayChildren: 0.03
+          }
+        }
+      };
+  const itemVariants = shouldReduceMotion
+    ? undefined
+    : {
+        hidden: { opacity: 0, y: 5 },
+        visible: { opacity: 1, y: 0 }
+      };
+  const itemTransition = { duration: shouldReduceMotion ? 0 : 0.16, ease: "easeOut" } as const;
 
   return (
     <Modal
@@ -76,12 +96,22 @@ export function ContactModal({
       disableClose={isSubmitting}
       showCloseButton={false}
     >
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={`${styles.section} ${styles.avatarSection}`}>
+      <motion.form
+        className={styles.form}
+        onSubmit={handleSubmit}
+        variants={containerVariants}
+        initial={shouldReduceMotion ? false : "hidden"}
+        animate="visible"
+      >
+        <motion.div
+          className={`${styles.section} ${styles.avatarSection}`}
+          variants={itemVariants}
+          transition={itemTransition}
+        >
           <AvatarPicker avatar={avatar} disabled={isSubmitting} allowRemove onChange={setAvatar} />
-        </div>
+        </motion.div>
 
-        <div className={styles.section}>
+        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
           <Input
             label="Name"
             value={name}
@@ -92,28 +122,32 @@ export function ContactModal({
             disabled={isSubmitting}
           />
           {nameError ? <p className={styles.error}>{nameError}</p> : null}
-        </div>
+        </motion.div>
 
-        <Input
-          label="Phone number"
-          value={phone}
-          placeholder="+01 234 5678"
-          className={styles.fieldInput}
-          onChange={(event) => setPhone(event.target.value)}
-          disabled={isSubmitting}
-        />
+        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
+          <Input
+            label="Phone number"
+            value={phone}
+            placeholder="+01 234 5678"
+            className={styles.fieldInput}
+            onChange={(event) => setPhone(event.target.value)}
+            disabled={isSubmitting}
+          />
+        </motion.div>
 
-        <Input
-          label="Email address"
-          type="email"
-          value={email}
-          placeholder="jamie.wright@mail.com"
-          className={styles.fieldInput}
-          onChange={(event) => setEmail(event.target.value)}
-          disabled={isSubmitting}
-        />
+        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
+          <Input
+            label="Email address"
+            type="email"
+            value={email}
+            placeholder="jamie.wright@mail.com"
+            className={styles.fieldInput}
+            onChange={(event) => setEmail(event.target.value)}
+            disabled={isSubmitting}
+          />
+        </motion.div>
 
-        <div className={styles.actions}>
+        <motion.div className={styles.actions} variants={itemVariants} transition={itemTransition}>
           <Button
             buttonType="secondary"
             variant="label"
@@ -132,8 +166,8 @@ export function ContactModal({
           >
             {isSubmitting ? "Saving..." : "Done"}
           </Button>
-        </div>
-      </form>
+        </motion.div>
+      </motion.form>
     </Modal>
   );
 }

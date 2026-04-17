@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { IconButton } from "../../ui/IconButton/IconButton";
 import moreIcon from "../../../assets/icons/More.svg";
 import editIcon from "../../../assets/icons/Change.svg";
@@ -15,6 +16,7 @@ interface ContactMenuProps {
 }
 
 export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps) {
+  const shouldReduceMotion = useReducedMotion();
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const closeMenu = useCallback(() => {
@@ -77,35 +79,43 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
         <img src={moreIcon} alt="" width="15" height="15" className={styles.moreIcon} />
       </IconButton>
 
-      {isOpen ? (
-        <div className={styles.dropdown}>
-          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
-            <img src={muteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
-            <span>Mute</span>
-          </button>
-          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
-            <img src={callIcon} alt="" width="20" height="20" className={styles.itemIcon} />
-            <span>Call</span>
-          </button>
-
-          <button type="button" className={styles.item} onClick={handleEdit}>
-            <img src={editIcon} alt="" width="20" height="20" className={styles.itemIcon} />
-            <span>Edit</span>
-          </button>
-          <button type="button" className={styles.item} disabled>
-            <img src={favouriteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
-            <span>Favourite</span>
-          </button>
-          <button
-            type="button"
-            className={`${styles.item} ${styles.remove}`}
-            onClick={handleRemove}
+      <AnimatePresence>
+        {isOpen ? (
+          <motion.div
+            className={styles.dropdown}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: -4, scale: 0.985 }}
+            animate={shouldReduceMotion ? {} : { opacity: 1, y: 0, scale: 1 }}
+            exit={shouldReduceMotion ? {} : { opacity: 0, y: -3, scale: 0.985 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.14, ease: "easeOut" }}
           >
-            <img src={removeIcon} alt="" width="20" height="20" className={styles.itemIcon} />
-            <span>Remove</span>
-          </button>
-        </div>
-      ) : null}
+            <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
+              <img src={muteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
+              <span>Mute</span>
+            </button>
+            <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
+              <img src={callIcon} alt="" width="20" height="20" className={styles.itemIcon} />
+              <span>Call</span>
+            </button>
+
+            <button type="button" className={styles.item} onClick={handleEdit}>
+              <img src={editIcon} alt="" width="20" height="20" className={styles.itemIcon} />
+              <span>Edit</span>
+            </button>
+            <button type="button" className={styles.item} disabled>
+              <img src={favouriteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
+              <span>Favourite</span>
+            </button>
+            <button
+              type="button"
+              className={`${styles.item} ${styles.remove}`}
+              onClick={handleRemove}
+            >
+              <img src={removeIcon} alt="" width="20" height="20" className={styles.itemIcon} />
+              <span>Remove</span>
+            </button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

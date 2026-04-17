@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Contact } from "../../../types/contact";
 import { ContactMenu } from "../ContactMenu/ContactMenu";
 import defaultAvatarImage from "../../../assets/images/Default.png";
@@ -24,14 +25,62 @@ function createTelHref(phone: string) {
   return `tel:${hasLeadingPlus ? `+${digits}` : digits}`;
 }
 
+const MOBILE_QUERY = "(max-width: 640px)";
+
 export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemProps) {
+  const shouldReduceMotion = useReducedMotion();
   const avatarSource = contact.avatar ?? defaultAvatarImage;
   const telHref = contact.phone ? createTelHref(contact.phone) : null;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") {
+      return false;
+    }
+
+    return window.matchMedia(MOBILE_QUERY).matches;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQueryList = window.matchMedia(MOBILE_QUERY);
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMobile(event.matches);
+      if (event.matches) {
+        setIsHovered(false);
+      }
+    };
+
+    setIsMobile(mediaQueryList.matches);
+
+    mediaQueryList.addEventListener("change", handleChange);
+    return () => mediaQueryList.removeEventListener("change", handleChange);
+  }, []);
+
+  const shouldShowActions = isMobile || isHovered || isMenuOpen;
   const itemClassName = `${styles.item}${isMenuOpen ? ` ${styles.itemMenuOpen}` : ""}`;
 
+  const actionsAnimation = shouldShowActions
+    ? { opacity: 1, x: 0 }
+    : { opacity: 0, x: 2 };
+
   return (
-    <li className={itemClassName}>
+    <motion.div
+      className={itemClassName}
+      onMouseEnter={() => !isMobile && setIsHovered(true)}
+      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onFocusCapture={() => !isMobile && setIsHovered(true)}
+      onBlurCapture={(event) => {
+        if (!isMobile && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+          setIsHovered(false);
+        }
+      }}
+      initial={false}
+    >
       <div className={styles.avatar}>
         <img
           src={avatarSource}
@@ -57,15 +106,39 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
         </p>
       </div>
 
-      <div className={styles.actions}>
-        <span className={styles.actionIcon} aria-hidden="true">
+      <motion.div
+        className={styles.actions}
+        initial={false}
+        animate={actionsAnimation}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.16, ease: "easeOut" }}
+        style={{ pointerEvents: shouldShowActions ? "auto" : "none" }}
+      >
+        <motion.span
+          className={styles.actionIcon}
+          aria-hidden="true"
+          initial={false}
+          animate={actionsAnimation}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.14, delay: shouldShowActions ? 0 : 0 }}
+        >
           <img src={muteIcon} alt="" width="16" height="16" className={styles.actionIconImage} />
-        </span>
-        <span className={styles.actionIcon} aria-hidden="true">
+        </motion.span>
+        <motion.span
+          className={styles.actionIcon}
+          aria-hidden="true"
+          initial={false}
+          animate={actionsAnimation}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.14, delay: shouldShowActions ? 0.03 : 0 }}
+        >
           <img src={callIcon} alt="" width="16" height="16" className={styles.actionIconImage} />
-        </span>
-        <ContactMenu onEdit={onEdit} onRemove={onRemove} onOpenChange={setIsMenuOpen} />
-      </div>
-    </li>
+        </motion.span>
+        <motion.div
+          initial={false}
+          animate={actionsAnimation}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.14, delay: shouldShowActions ? 0.06 : 0 }}
+        >
+          <ContactMenu onEdit={onEdit} onRemove={onRemove} onOpenChange={setIsMenuOpen} />
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 }
