@@ -90,7 +90,7 @@ export function ContactModal({
           <Input
             label="Name"
             value={name}
-            placeholder="Example"
+            placeholder="Jamie Wright"
             className={styles.fieldInput}
             onChange={(event) => setName(event.target.value)}
             required
@@ -102,7 +102,7 @@ export function ContactModal({
         <Input
           label="Phone number"
           value={phone}
-          placeholder="Example"
+          placeholder="+01 234 5678"
           className={styles.fieldInput}
           onChange={(event) => setPhone(event.target.value)}
           disabled={isSubmitting}
@@ -112,7 +112,7 @@ export function ContactModal({
           label="Email address"
           type="email"
           value={email}
-          placeholder="Example"
+          placeholder="jamie.wright@mail.com"
           className={styles.fieldInput}
           onChange={(event) => setEmail(event.target.value)}
           disabled={isSubmitting}
