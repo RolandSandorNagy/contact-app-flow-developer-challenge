@@ -71,6 +71,7 @@
 .actions {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 8px;
   opacity: 0;
   pointer-events: none;
@@ -130,17 +131,11 @@
   .name {
     font-size: var(--h3-size);
     line-height: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .phone {
     font-size: var(--message-size);
     line-height: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .actions {

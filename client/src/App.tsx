@@ -46,6 +46,7 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(THEME_STORAGE_KEY, theme);
     document.documentElement.style.colorScheme = theme;
+    document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 
   const loadContacts = useCallback(async () => {

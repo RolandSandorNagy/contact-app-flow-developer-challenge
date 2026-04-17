@@ -46,14 +46,15 @@
   --shadow-popover: 0 18px 34px rgba(8, 16, 30, 0.16);
 
   --input-border: #c7cfda;
+  --input-hover-border: #b9c3d1;
   --input-focus-border: #9eabbc;
-  --input-bg-from: #f8f9fb;
-  --input-bg-to: #eceff4;
+  --input-bg: #f8f9fb;
+  --input-active-bg: #eceff4;
   --input-placeholder: rgba(18, 22, 29, 0.42);
 
-  --button-primary-bg: #f4f6fa;
-  --button-primary-hover-bg: #eef2f7;
-  --button-primary-active-bg: #e5eaf1;
+  --button-primary-bg: #cfd6df;
+  --button-primary-hover-bg: #c1c9d4;
+  --button-primary-active-bg: #aeb8c5;
   --button-primary-border: transparent;
   --button-primary-color: rgba(18, 22, 29, 0.94);
   --button-primary-hover-border: transparent;
@@ -71,6 +72,8 @@
     rgba(194, 204, 217, 0) 100%
   );
   --button-special-color: rgba(18, 22, 29, 0.94);
+  --menu-item-hover-bg: rgba(18, 22, 29, 0.05);
+  --menu-item-active-bg: rgba(18, 22, 29, 0.03);
   --ui-icon-filter: brightness(0) saturate(100%);
 }
 
