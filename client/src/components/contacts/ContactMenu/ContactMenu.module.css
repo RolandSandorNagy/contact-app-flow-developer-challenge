@@ -24,6 +24,7 @@
   height: auto;
   object-fit: contain;
   opacity: 0.9;
+  filter: var(--ui-icon-filter);
 }
 
 .dropdown {
@@ -68,6 +69,7 @@
   object-fit: contain;
   opacity: 0.88;
   flex-shrink: 0;
+  filter: var(--ui-icon-filter);
 }
 
 .item:hover {

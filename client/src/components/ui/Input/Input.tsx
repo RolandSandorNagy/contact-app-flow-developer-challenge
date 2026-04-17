@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes } from "react";
+import { useId, type InputHTMLAttributes } from "react";
 import styles from "./Input.module.css";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -6,7 +6,8 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ id, label, className = "", ...props }: InputProps) {
-  const inputId = id ?? (label ? `input-${label.toLowerCase().replace(/\s+/g, "-")}` : undefined);
+  const generatedId = useId();
+  const inputId = id ?? generatedId;
 
   return (
     <div className={styles.wrapper}>
@@ -19,4 +20,3 @@ export function Input({ id, label, className = "", ...props }: InputProps) {
     </div>
   );
 }
-

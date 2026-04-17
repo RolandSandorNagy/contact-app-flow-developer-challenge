@@ -49,7 +49,8 @@ async function parseResponse<T>(response: Response): Promise<T> {
 
 export async function getContacts() {
   const response = await fetch(`${API_BASE_URL}/api/contacts`);
-  return parseResponse<Contact[]>(response);
+  const contacts = await parseResponse<Contact[] | undefined>(response);
+  return contacts ?? [];
 }
 
 export async function createContact(payload: ContactPayload) {

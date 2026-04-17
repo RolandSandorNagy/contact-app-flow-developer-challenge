@@ -66,6 +66,7 @@
   --button-primary-active-from: #242424;
   --button-primary-active-to: #242424;
   --button-primary-active-border: #3c3c3c;
+  --ui-icon-filter: none;
 
   /* Shared sizing */
   --size-control-md: 40px;

@@ -32,6 +32,11 @@ async function startServer() {
     httpServer = app.listen(port, () => {
       console.log(`Server listening on http://localhost:${port}`);
     });
+
+    httpServer.on("error", (error) => {
+      console.error(`Server failed to start on port ${port}.`, error);
+      process.exit(1);
+    });
   } catch (error) {
     console.error("Failed to initialize database.", error);
     process.exit(1);

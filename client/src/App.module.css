@@ -61,10 +61,7 @@
   --button-primary-active-from: #e5eaf1;
   --button-primary-active-to: #dde4ed;
   --button-primary-active-border: #aeb9c8;
-}
-
-.themeLight img[src$=".svg"] {
-  filter: brightness(0) saturate(100%);
+  --ui-icon-filter: brightness(0) saturate(100%);
 }
 
 .themeLight .headerAvatarImage {
@@ -208,6 +205,7 @@
 .headerIconImage {
   object-fit: contain;
   opacity: 0.95;
+  filter: var(--ui-icon-filter);
 }
 
 .backIconImage {
@@ -269,6 +267,7 @@
   height: 100%;
   object-fit: contain;
   opacity: 0.95;
+  filter: var(--ui-icon-filter);
 }
 
 .error {
