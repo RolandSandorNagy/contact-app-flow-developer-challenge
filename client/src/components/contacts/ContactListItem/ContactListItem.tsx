@@ -59,10 +59,10 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
 
       <div className={styles.actions}>
         <span className={styles.actionIcon} aria-hidden="true">
-          <img src={muteIcon} alt="" className={styles.actionIconImage} />
+          <img src={muteIcon} alt="" width="16" height="16" className={styles.actionIconImage} />
         </span>
         <span className={styles.actionIcon} aria-hidden="true">
-          <img src={callIcon} alt="" className={styles.actionIconImage} />
+          <img src={callIcon} alt="" width="16" height="16" className={styles.actionIconImage} />
         </span>
         <ContactMenu onEdit={onEdit} onRemove={onRemove} onOpenChange={setIsMenuOpen} />
       </div>

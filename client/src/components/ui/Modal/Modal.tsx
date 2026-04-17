@@ -1,4 +1,5 @@
 import { useEffect, useId, type ReactNode } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { IconButton } from "../IconButton/IconButton";
 import styles from "./Modal.module.css";
 
@@ -20,6 +21,7 @@ export function Modal({
   children
 }: ModalProps) {
   const titleId = useId();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (!isOpen || disableClose) {
@@ -36,10 +38,6 @@ export function Modal({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose, disableClose]);
 
-  if (!isOpen) {
-    return null;
-  }
-
   const handleOverlayClick = () => {
     if (!disableClose) {
       onClose();
@@ -47,31 +45,47 @@ export function Modal({
   };
 
   return (
-    <div className={styles.overlay} onClick={handleOverlayClick} role="presentation">
-      <div
-        className={styles.modal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby={titleId}
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className={styles.header}>
-          <h2 id={titleId} className={styles.title}>
-            {title}
-          </h2>
-          {showCloseButton ? (
-            <IconButton
-              className={styles.closeButton}
-              onClick={onClose}
-              disabled={disableClose}
-              aria-label="Close modal"
-            >
-              <span className={styles.closeIcon}>x</span>
-            </IconButton>
-          ) : null}
-        </div>
-        <div className={styles.content}>{children}</div>
-      </div>
-    </div>
+    <AnimatePresence>
+      {isOpen ? (
+        <motion.div
+          className={styles.overlay}
+          onClick={handleOverlayClick}
+          role="presentation"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.16, ease: "easeOut" }}
+        >
+          <motion.div
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            onClick={(event) => event.stopPropagation()}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 10, scale: 0.985 }}
+            animate={shouldReduceMotion ? {} : { opacity: 1, y: 0, scale: 1 }}
+            exit={shouldReduceMotion ? {} : { opacity: 0, y: 8, scale: 0.985 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
+          >
+            <div className={styles.header}>
+              <h2 id={titleId} className={styles.title}>
+                {title}
+              </h2>
+              {showCloseButton ? (
+                <IconButton
+                  className={styles.closeButton}
+                  onClick={onClose}
+                  disabled={disableClose}
+                  aria-label="Close modal"
+                >
+                  <span className={styles.closeIcon}>x</span>
+                </IconButton>
+              ) : null}
+            </div>
+            <div className={styles.content}>{children}</div>
+          </motion.div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }
