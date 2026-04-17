@@ -56,6 +56,16 @@
   --input-bg-from: #1b1c20;
   --input-bg-to: #202125;
   --input-placeholder: rgba(255, 255, 255, 0.34);
+  --button-primary-bg-from: #282828;
+  --button-primary-bg-to: #282828;
+  --button-primary-border: #3c3c3c;
+  --button-primary-color: var(--fg-100);
+  --button-primary-hover-from: #303030;
+  --button-primary-hover-to: #303030;
+  --button-primary-hover-border: #4a4a4a;
+  --button-primary-active-from: #242424;
+  --button-primary-active-to: #242424;
+  --button-primary-active-border: #3c3c3c;
 
   /* Shared sizing */
   --size-control-md: 40px;

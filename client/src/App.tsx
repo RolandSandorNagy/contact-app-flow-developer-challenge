@@ -17,17 +17,32 @@ import settingsIcon from "./assets/icons/Settings.svg";
 import headerProfileImage from "./assets/images/Jacqueline.png";
 import styles from "./App.module.css";
 
+const THEME_STORAGE_KEY = "contact-app-theme";
+
 function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error ? error.message : fallback;
 }
 
 function App() {
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") {
+      return "dark";
+    }
+
+    return window.localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
+  });
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editingContact, setEditingContact] = useState<Contact | null>(null);
+  const isLightMode = theme === "light";
+
+  useEffect(() => {
+    window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    document.documentElement.style.colorScheme = theme;
+  }, [theme]);
 
   const loadContacts = useCallback(async () => {
     try {
@@ -101,8 +116,14 @@ function App() {
     }
   };
 
+  const toggleTheme = () => {
+    setTheme((previous) => (previous === "dark" ? "light" : "dark"));
+  };
+
+  const themeButtonLabel = isLightMode ? "Switch to dark mode" : "Switch to light mode";
+
   return (
-    <div className={styles.app}>
+    <div className={`${styles.app} ${isLightMode ? styles.themeLight : ""}`.trim()}>
       <header className={styles.topBar}>
         <div className={styles.headerLeftCell}>
           <span className={styles.backIcon} aria-hidden="true">
@@ -137,13 +158,19 @@ function App() {
               <span className={styles.headerAvatar} aria-hidden="true">
                 <img src={headerProfileImage} alt="" className={styles.headerAvatarImage} />
               </span>
-              <span className={`${styles.headerIcon} ${styles.mobileOnlyLightIcon}`} aria-hidden="true">
+              <button
+                type="button"
+                className={`${styles.headerIcon} ${styles.mobileOnlyLightIcon} ${styles.lightModeButton}`}
+                onClick={toggleTheme}
+                aria-label={themeButtonLabel}
+                aria-pressed={isLightMode}
+              >
                 <img
                   src={lightModeIcon}
                   alt=""
                   className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
                 />
-              </span>
+              </button>
             </div>
 
             <Button
@@ -161,13 +188,19 @@ function App() {
         </div>
 
         <div className={styles.headerRightCell}>
-          <span className={styles.headerIcon} aria-hidden="true">
+          <button
+            type="button"
+            className={`${styles.headerIcon} ${styles.lightModeButton}`}
+            onClick={toggleTheme}
+            aria-label={themeButtonLabel}
+            aria-pressed={isLightMode}
+          >
             <img
               src={lightModeIcon}
               alt=""
               className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
             />
-          </span>
+          </button>
         </div>
       </header>
 
