@@ -67,9 +67,17 @@ export function AvatarPicker({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.preview}>
-        <img className={styles.image} src={avatar ?? defaultAvatarImage} alt="Avatar preview" />
-      </div>
+      <button
+        className={styles.previewButton}
+        type="button"
+        onClick={handlePickClick}
+        disabled={disabled}
+        aria-label={avatar ? "Change picture" : "Upload picture"}
+      >
+        <span className={styles.preview}>
+          <img className={styles.image} src={avatar ?? defaultAvatarImage} alt="Avatar preview" />
+        </span>
+      </button>
 
       <div className={styles.actions}>
         <input
