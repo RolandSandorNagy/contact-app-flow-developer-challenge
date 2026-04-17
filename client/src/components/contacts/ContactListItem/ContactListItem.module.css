@@ -42,7 +42,6 @@
 
 .phone {
   color: var(--fg-56);
-  margin-top: 0.1rem;
   font-size: var(--message-size);
   line-height: var(--message-line);
   font-weight: var(--message-weight);
