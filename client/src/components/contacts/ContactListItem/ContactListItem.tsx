@@ -33,7 +33,15 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
   return (
     <li className={itemClassName}>
       <div className={styles.avatar}>
-        <img src={avatarSource} alt={`${contact.name} avatar`} className={styles.avatarImage} />
+        <img
+          src={avatarSource}
+          alt={`${contact.name} avatar`}
+          width="40"
+          height="40"
+          loading="lazy"
+          decoding="async"
+          className={styles.avatarImage}
+        />
       </div>
 
       <div className={styles.info}>

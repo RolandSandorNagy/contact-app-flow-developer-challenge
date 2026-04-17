@@ -1,6 +1,7 @@
 import type { Contact, ContactPayload } from "../types/contact";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000";
+let inflightContactsRequest: Promise<Contact[]> | null = null;
 
 function safeParseJson(value: string) {
   try {
@@ -48,9 +49,21 @@ async function parseResponse<T>(response: Response): Promise<T> {
 }
 
 export async function getContacts() {
-  const response = await fetch(`${API_BASE_URL}/api/contacts`);
-  const contacts = await parseResponse<Contact[] | undefined>(response);
-  return contacts ?? [];
+  if (inflightContactsRequest) {
+    return inflightContactsRequest;
+  }
+
+  inflightContactsRequest = (async () => {
+    const response = await fetch(`${API_BASE_URL}/api/contacts`);
+    const contacts = await parseResponse<Contact[] | undefined>(response);
+    return contacts ?? [];
+  })();
+
+  try {
+    return await inflightContactsRequest;
+  } finally {
+    inflightContactsRequest = null;
+  }
 }
 
 export async function createContact(payload: ContactPayload) {

@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useState } from "react";
+import { Suspense, lazy, useCallback, useEffect, useState } from "react";
 import { ContactList } from "./components/contacts/ContactList/ContactList";
 import { Button } from "./components/ui/Button/Button";
-import { ContactModal } from "./components/contacts/ContactModal/ContactModal";
 import {
   createContact,
   deleteContact,
@@ -14,10 +13,15 @@ import addIcon from "./assets/icons/Add.svg";
 import backArrowIcon from "./assets/icons/BackArrow.svg";
 import lightModeIcon from "./assets/icons/LightMode.svg";
 import settingsIcon from "./assets/icons/Settings.svg";
-import headerProfileImage from "./assets/images/Jacqueline.png";
+import headerProfileImage from "./assets/images/JacquelineHeader.webp";
 import styles from "./App.module.css";
 
 const THEME_STORAGE_KEY = "contact-app-theme";
+const ContactModal = lazy(() =>
+  import("./components/contacts/ContactModal/ContactModal").then((module) => ({
+    default: module.ContactModal
+  }))
+);
 
 function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error ? error.message : fallback;
@@ -130,6 +134,8 @@ function App() {
             <img
               src={backArrowIcon}
               alt=""
+              width="16"
+              height="16"
               className={`${styles.headerIconImage} ${styles.backIconImage}`}
             />
           </span>
@@ -140,6 +146,8 @@ function App() {
             <img
               src={backArrowIcon}
               alt=""
+              width="16"
+              height="16"
               className={`${styles.headerIconImage} ${styles.backIconImage}`}
             />
           </span>
@@ -152,11 +160,20 @@ function App() {
                 <img
                   src={settingsIcon}
                   alt=""
+                  width="19"
+                  height="19"
                   className={`${styles.headerIconImage} ${styles.settingsIconImage}`}
                 />
               </span>
               <span className={styles.headerAvatar} aria-hidden="true">
-                <img src={headerProfileImage} alt="" className={styles.headerAvatarImage} />
+                <img
+                  src={headerProfileImage}
+                  alt=""
+                  width="24"
+                  height="24"
+                  decoding="async"
+                  className={styles.headerAvatarImage}
+                />
               </span>
               <button
                 type="button"
@@ -168,6 +185,8 @@ function App() {
                 <img
                   src={lightModeIcon}
                   alt=""
+                  width="22"
+                  height="22"
                   className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
                 />
               </button>
@@ -180,7 +199,7 @@ function App() {
               onClick={openAddModal}
             >
               <span className={styles.addPlus} aria-hidden="true">
-                <img src={addIcon} alt="" className={styles.addPlusIcon} />
+                <img src={addIcon} alt="" width="24" height="24" className={styles.addPlusIcon} />
               </span>
               <span>Add new</span>
             </Button>
@@ -198,6 +217,8 @@ function App() {
             <img
               src={lightModeIcon}
               alt=""
+              width="22"
+              height="22"
               className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
             />
           </button>
@@ -214,14 +235,18 @@ function App() {
         )}
       </main>
 
-      <ContactModal
-        isOpen={isModalOpen}
-        mode={editingContact ? "edit" : "add"}
-        contact={editingContact}
-        isSubmitting={isSaving}
-        onClose={closeModal}
-        onSubmit={handleSubmit}
-      />
+      {isModalOpen ? (
+        <Suspense fallback={null}>
+          <ContactModal
+            isOpen={isModalOpen}
+            mode={editingContact ? "edit" : "add"}
+            contact={editingContact}
+            isSubmitting={isSaving}
+            onClose={closeModal}
+            onSubmit={handleSubmit}
+          />
+        </Suspense>
+      ) : null}
     </div>
   );
 }

@@ -75,7 +75,14 @@ export function AvatarPicker({
         aria-label={avatar ? "Change picture" : "Upload picture"}
       >
         <span className={styles.preview}>
-          <img className={styles.image} src={avatar ?? defaultAvatarImage} alt="Avatar preview" />
+          <img
+            className={styles.image}
+            src={avatar ?? defaultAvatarImage}
+            alt="Avatar preview"
+            width="88"
+            height="88"
+            decoding="async"
+          />
         </span>
       </button>
 

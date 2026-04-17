@@ -49,31 +49,31 @@ const seedContacts = [
     name: "Timothy Lewis",
     phone: "+36 01 234 5678",
     email: null,
-    avatar: resolveSeedAvatar("Timothy.png")
+    avatar: resolveSeedAvatar("TimothySeed.webp")
   },
   {
     name: "Sarah Wright",
     phone: "+36 01 234 5678",
     email: null,
-    avatar: resolveSeedAvatar("Sarah.png")
+    avatar: resolveSeedAvatar("SarahSeed.webp")
   },
   {
     name: "Lucy Jones",
     phone: "+36 01 234 5678",
     email: null,
-    avatar: resolveSeedAvatar("Lucy.png")
+    avatar: resolveSeedAvatar("LucySeed.webp")
   },
   {
     name: "Jake Perez",
     phone: "+36 01 234 5678",
     email: null,
-    avatar: resolveSeedAvatar("Jake.png")
+    avatar: resolveSeedAvatar("JakeSeed.webp")
   },
   {
     name: "Adebayo Rodriguez",
     phone: "+36 01 234 5678",
     email: null,
-    avatar: resolveSeedAvatar("Adebayo.png")
+    avatar: resolveSeedAvatar("AdebayoSeed.webp")
   }
 ];
 
