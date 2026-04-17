@@ -82,3 +82,21 @@
 .remove {
   color: var(--fg-100);
 }
+
+@media (max-width: 640px) {
+  .trigger {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    padding: 6px;
+  }
+
+  .moreIcon {
+    width: 12px;
+  }
+
+  .dropdown {
+    min-width: min(220px, calc(100vw - 24px));
+    right: 0;
+  }
+}

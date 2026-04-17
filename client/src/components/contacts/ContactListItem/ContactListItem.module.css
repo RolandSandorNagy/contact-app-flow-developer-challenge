@@ -106,18 +106,36 @@
 @media (max-width: 640px) {
   .item {
     min-height: 42px;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
   }
 
   .name {
     font-size: var(--h3-size);
+    line-height: 20px;
   }
 
   .phone {
     font-size: var(--message-size);
+    line-height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .actions {
     opacity: 1;
     pointer-events: auto;
+    gap: 4px;
+    margin-left: 4px;
+  }
+
+  .actionIcon {
+    display: none;
   }
 }
