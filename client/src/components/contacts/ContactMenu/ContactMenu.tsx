@@ -4,6 +4,8 @@ import moreIcon from "../../../assets/icons/More.svg";
 import editIcon from "../../../assets/icons/Change.svg";
 import favouriteIcon from "../../../assets/icons/Favourite.svg";
 import removeIcon from "../../../assets/icons/Delete.svg";
+import muteIcon from "../../../assets/icons/Mute.svg";
+import callIcon from "../../../assets/icons/Call.svg";
 import styles from "./ContactMenu.module.css";
 
 interface ContactMenuProps {
@@ -63,6 +65,15 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
 
       {isOpen ? (
         <div className={styles.dropdown} role="menu">
+          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} role="menuitem" disabled>
+            <img src={muteIcon} alt="" className={styles.itemIcon} />
+            <span>Mute</span>
+          </button>
+          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} role="menuitem" disabled>
+            <img src={callIcon} alt="" className={styles.itemIcon} />
+            <span>Call</span>
+          </button>
+
           <button type="button" className={styles.item} role="menuitem" onClick={handleEdit}>
             <img src={editIcon} alt="" className={styles.itemIcon} />
             <span>Edit</span>

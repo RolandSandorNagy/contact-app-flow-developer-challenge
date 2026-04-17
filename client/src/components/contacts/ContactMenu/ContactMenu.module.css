@@ -38,6 +38,10 @@
   overflow: hidden;
 }
 
+.mobileOnlyItem {
+  display: none;
+}
+
 .item {
   width: 100%;
   border: none;
@@ -98,5 +102,9 @@
   .dropdown {
     min-width: min(204px, calc(100vw - 20px));
     right: 0;
+  }
+
+  .mobileOnlyItem {
+    display: inline-flex;
   }
 }
