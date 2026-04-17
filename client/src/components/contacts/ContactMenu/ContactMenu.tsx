@@ -74,26 +74,26 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
         className={styles.trigger}
         onClick={toggleMenu}
       >
-        <img src={moreIcon} alt="" className={styles.moreIcon} />
+        <img src={moreIcon} alt="" width="15" height="15" className={styles.moreIcon} />
       </IconButton>
 
       {isOpen ? (
         <div className={styles.dropdown}>
           <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
-            <img src={muteIcon} alt="" className={styles.itemIcon} />
+            <img src={muteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Mute</span>
           </button>
           <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
-            <img src={callIcon} alt="" className={styles.itemIcon} />
+            <img src={callIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Call</span>
           </button>
 
           <button type="button" className={styles.item} onClick={handleEdit}>
-            <img src={editIcon} alt="" className={styles.itemIcon} />
+            <img src={editIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Edit</span>
           </button>
           <button type="button" className={styles.item} disabled>
-            <img src={favouriteIcon} alt="" className={styles.itemIcon} />
+            <img src={favouriteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Favourite</span>
           </button>
           <button
@@ -101,7 +101,7 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
             className={`${styles.item} ${styles.remove}`}
             onClick={handleRemove}
           >
-            <img src={removeIcon} alt="" className={styles.itemIcon} />
+            <img src={removeIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Remove</span>
           </button>
         </div>
