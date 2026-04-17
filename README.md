@@ -33,6 +33,17 @@ npm run dev
 ```
 Frontend URL (default): `http://localhost:5173`
 
+### Lighthouse check (recommended)
+For reliable Lighthouse scores, run the frontend in production preview mode instead of `npm run dev`:
+
+```bash
+cd client
+npm run build
+npm run preview -- --host
+```
+
+Preview URL (default): `http://localhost:4173`
+
 ## Database notes
 - SQLite database file is created at `server/data/contacts.db`.
 - Table: `contacts`
