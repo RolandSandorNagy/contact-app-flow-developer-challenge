@@ -43,11 +43,11 @@ Frontend URL (default): `http://localhost:5173`
 
 ## Seed data
 - On server startup, seed contacts are inserted automatically only when the `contacts` table is empty.
-- Seed records include a mix of:
-  - `avatar = null`
-  - phone only
-  - email only
-  - both phone and email
+- Current seed inserts 5 design-matching contacts.
+- Seed avatars are loaded from `client/src/assets/images`, then stored in SQLite as base64 data URIs.
+- Seed records currently include phone numbers and avatar images; emails are `null`.
+- If a seed image is missing, the default avatar image is used as fallback.
+- To re-run seed from scratch, delete `server/data/contacts.db` and restart the backend.
 
 ## What I would improve next
 - Add lightweight API tests for CRUD endpoints.
