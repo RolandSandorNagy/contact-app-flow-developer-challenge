@@ -31,11 +31,11 @@
 }
 
 .changeButton {
-  min-height: 40px;
-  border-radius: 10px;
+  min-height: var(--size-control-md);
+  border-radius: var(--radius-control);
   padding: 0 16px 0 12px;
   border: none;
-  background: #282828;
+  background: var(--color-grid-line);
 }
 
 .changeButtonContent {
@@ -52,12 +52,12 @@
 }
 
 .removeButton {
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: var(--size-control-md);
+  min-width: var(--size-control-md);
+  height: var(--size-control-md);
+  border-radius: var(--radius-control);
   border: none;
-  background: var(--grid-line);
+  background: var(--color-grid-line);
   color: var(--fg-80);
   padding: 8px;
 }

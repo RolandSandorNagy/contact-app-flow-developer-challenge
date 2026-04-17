@@ -1,17 +1,19 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(8, 9, 12, 0.78);
+  background-color: var(--overlay-backdrop);
   display: grid;
   place-items: center;
   padding: 0.9rem 0.7rem;
   z-index: 30;
+  cursor: var(--cursor-pointer);
 }
 
 .modal {
   width: min(364px, 100%);
-  background: #101114;
+  background: var(--surface-modal);
   border-radius: 16px;
+  cursor: var(--cursor-default);
 }
 
 .header {

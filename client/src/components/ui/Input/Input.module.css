@@ -13,31 +13,32 @@
 
 .input {
   width: 100%;
-  min-height: 40px;
+  min-height: var(--size-control-md);
   border-radius: 8px;
-  border: 1px solid #2b2d31;
+  border: 1px solid var(--input-border);
   padding: 0 12px;
   font-size: var(--body-size);
   line-height: var(--body-line);
   letter-spacing: var(--body-letter);
   font-weight: var(--body-weight);
   color: var(--fg-100);
-  background: linear-gradient(90deg, #1b1c20 0%, #202125 100%);
+  background: linear-gradient(90deg, var(--input-bg-from) 0%, var(--input-bg-to) 100%);
   transition:
     border-color 0.18s ease,
     color 0.18s ease,
     background 0.18s ease,
     box-shadow 0.18s ease;
+  cursor: var(--cursor-text);
 }
 
 .input:focus {
   outline: none;
-  border-color: #3a3d44;
+  border-color: var(--input-focus-border);
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 .input::placeholder {
-  color: rgba(255, 255, 255, 0.34);
+  color: var(--input-placeholder);
 }
 
 .input[placeholder]:not(:placeholder-shown) {
@@ -46,5 +47,5 @@
 
 .input:disabled {
   opacity: 0.72;
-  cursor: not-allowed;
+  cursor: var(--cursor-disabled);
 }

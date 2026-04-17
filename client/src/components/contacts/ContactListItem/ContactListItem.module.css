@@ -2,14 +2,14 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  min-height: 44px;
+  min-height: var(--size-list-item);
   padding: 12px 0;
   transition: background-color 0.18s ease;
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: var(--size-control-md);
+  height: var(--size-control-md);
   border-radius: 50%;
   background-color: var(--gray-50);
   color: var(--fg-80);
@@ -62,8 +62,8 @@
 }
 
 .actionIcon {
-  width: 40px;
-  height: 40px;
+  width: var(--size-control-md);
+  height: var(--size-control-md);
   display: inline-flex;
   align-items: center;
   justify-content: center;

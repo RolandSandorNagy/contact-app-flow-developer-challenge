@@ -43,6 +43,36 @@
   --danger-border: #55333a;
   --danger-border-hover: #6a3a43;
 
+  /* Shared UI surfaces/effects */
+  --color-grid-line: #282828;
+  --surface-modal: #101114;
+  --surface-popover: #1e1e1e;
+  --overlay-backdrop: rgba(8, 9, 12, 0.78);
+  --shadow-popover: 0 22px 40px rgba(0, 0, 0, 0.52);
+
+  /* Shared input styling */
+  --input-border: #2b2d31;
+  --input-focus-border: #3a3d44;
+  --input-bg-from: #1b1c20;
+  --input-bg-to: #202125;
+  --input-placeholder: rgba(255, 255, 255, 0.34);
+
+  /* Shared sizing */
+  --size-control-md: 40px;
+  --size-control-lg: 48px;
+  --size-list-item: 44px;
+  --radius-control: 10px;
+
+  /* Cursor system (SVG + fallback) */
+  --cursor-default: url("../assets/cursors/Default.svg"), default;
+  --cursor-pointer: url("../assets/cursors/PointingHand.svg"), pointer;
+  --cursor-text: url("../assets/cursors/Beam.svg"), text;
+  --cursor-disabled: url("../assets/cursors/Disabled.svg"), not-allowed;
+  --cursor-grab: url("../assets/cursors/MovingArrows.svg"), grab;
+  --cursor-grabbing: url("../assets/cursors/GrabbingHand.svg"), grabbing;
+  --cursor-zoom-in: url("../assets/cursors/ZoomIn.svg"), zoom-in;
+  --cursor-zoom-out: url("../assets/cursors/ZoomOut.svg"), zoom-out;
+
   --h1-size: 32px;
   --h1-line: 48px;
   --h1-weight: 500;
@@ -84,6 +114,7 @@ body {
   font-family: var(--font-body);
   font-weight: var(--body-weight);
   background: var(--gray-100);
+  cursor: var(--cursor-default);
 }
 
 #root {

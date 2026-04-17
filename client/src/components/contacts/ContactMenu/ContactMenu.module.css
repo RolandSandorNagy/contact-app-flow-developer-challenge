@@ -3,8 +3,8 @@
 }
 
 .trigger {
-  width: 48px;
-  height: 48px;
+  width: var(--size-control-lg);
+  height: var(--size-control-lg);
   border-radius: 12px;
   padding: 8px;
   border: none;
@@ -28,16 +28,17 @@
   right: 0;
   min-width: 292px;
   border-radius: 14px;
-  background: #1e1e1e;
-  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.52);
+  background: var(--surface-popover);
+  box-shadow: var(--shadow-popover);
   z-index: 12;
+  overflow: hidden;
 }
 
 .item {
   width: 100%;
   border: none;
   border-radius: 0;
-  min-height: 44px;
+  min-height: var(--size-list-item);
   padding: 0 1.05rem;
   text-align: left;
   background: transparent;
@@ -49,7 +50,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   transition: background-color 0.15s ease;
 }
 
@@ -70,7 +71,7 @@
 }
 
 .item:disabled {
-  cursor: default;
+  cursor: var(--cursor-disabled);
   opacity: 1;
 }
 

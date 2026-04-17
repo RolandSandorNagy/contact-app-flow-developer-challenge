@@ -102,7 +102,11 @@ function App() {
       <header className={styles.topBar}>
         <div className={styles.headerLeftCell}>
           <span className={styles.backIcon} aria-hidden="true">
-            <img src={backArrowIcon} alt="" className={styles.iconImage} />
+            <img
+              src={backArrowIcon}
+              alt=""
+              className={`${styles.headerIconImage} ${styles.backIconImage}`}
+            />
           </span>
         </div>
 
@@ -112,7 +116,11 @@ function App() {
           <div className={styles.headerControlsBox}>
             <div className={styles.headerControlsBoxIcons}>
               <span className={styles.headerIcon} aria-hidden="true">
-                <img src={settingsIcon} alt="" className={styles.iconImage} />
+                <img
+                  src={settingsIcon}
+                  alt=""
+                  className={`${styles.headerIconImage} ${styles.settingsIconImage}`}
+                />
               </span>
               <span className={styles.headerAvatar} aria-hidden="true">
                 <img src={headerProfileImage} alt="" className={styles.headerAvatarImage} />
@@ -130,7 +138,11 @@ function App() {
 
         <div className={styles.headerRightCell}>
           <span className={styles.headerIcon} aria-hidden="true">
-            <img src={lightModeIcon} alt="" className={styles.iconImage} />
+            <img
+              src={lightModeIcon}
+              alt=""
+              className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
+            />
           </span>
         </div>
       </header>
