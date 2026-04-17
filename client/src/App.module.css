@@ -51,16 +51,26 @@
   --input-bg-to: #eceff4;
   --input-placeholder: rgba(18, 22, 29, 0.42);
 
-  --button-primary-bg-from: #f4f6fa;
-  --button-primary-bg-to: #edf1f6;
-  --button-primary-border: #c6ced9;
+  --button-primary-bg: #f4f6fa;
+  --button-primary-hover-bg: #eef2f7;
+  --button-primary-active-bg: #e5eaf1;
+  --button-primary-border: transparent;
   --button-primary-color: rgba(18, 22, 29, 0.94);
-  --button-primary-hover-from: #eef2f7;
-  --button-primary-hover-to: #e7ecf3;
-  --button-primary-hover-border: #b7c1ce;
-  --button-primary-active-from: #e5eaf1;
-  --button-primary-active-to: #dde4ed;
-  --button-primary-active-border: #aeb9c8;
+  --button-primary-hover-border: transparent;
+  --button-primary-active-border: transparent;
+  --button-special-base-layer: linear-gradient(0deg, #e7ebf2, #e7ebf2);
+  --button-special-depth-layer: linear-gradient(180deg, rgba(205, 216, 231, 0.7) 0%, #dde5f0 100%);
+  --button-special-hover-overlay: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.45),
+    rgba(255, 255, 255, 0.45)
+  );
+  --button-special-border-gradient: linear-gradient(
+    180deg,
+    rgba(194, 204, 217, 1) 0%,
+    rgba(194, 204, 217, 0) 100%
+  );
+  --button-special-color: rgba(18, 22, 29, 0.94);
   --ui-icon-filter: brightness(0) saturate(100%);
 }
 
@@ -270,6 +280,10 @@
   filter: var(--ui-icon-filter);
 }
 
+.addButtonLabel {
+  display: inline;
+}
+
 .error {
   position: relative;
   z-index: 1;
@@ -390,13 +404,13 @@
   }
 
   .settingsIconImage {
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
   }
 
   .lightModeIconImage {
-    width: 16px;
-    height: 16px;
+    width: 19px;
+    height: 19px;
   }
 
   .headerAvatar {
@@ -409,18 +423,23 @@
     grid-column: 2;
     grid-row: 2;
     justify-self: end;
-    min-height: 34px;
-    height: 34px;
-    padding: 8px 9px 8px 8px;
-    gap: 6px;
+    min-height: 38px;
+    min-width: 38px;
+    width: 38px;
+    height: 38px;
+    padding: 9px;
+    gap: 0;
     font-size: 13px;
-    white-space: nowrap;
   }
 
   .addPlus {
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     transform: none;
+  }
+
+  .addButtonLabel {
+    display: none;
   }
 
   .content {

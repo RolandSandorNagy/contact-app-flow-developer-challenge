@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from "react";
 import styles from "./Button.module.css";
 
-type ButtonType = "primary" | "secondary";
+type ButtonType = "primary" | "secondary" | "special";
 type ButtonVariant = "label" | "labelIcon" | "icon";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

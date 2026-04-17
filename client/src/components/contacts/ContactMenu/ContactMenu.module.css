@@ -37,6 +37,7 @@
   box-shadow: var(--shadow-popover);
   z-index: 12;
   overflow: hidden;
+  transform-origin: top right;
 }
 
 .item {
@@ -104,9 +105,27 @@
   .dropdown {
     min-width: min(204px, calc(100vw - 20px));
     right: 0;
+    animation: dropdownInMobile 0.14s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .item.mobileOnlyItem {
     display: inline-flex;
+  }
+}
+
+@keyframes dropdownInMobile {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown {
+    animation: none;
   }
 }

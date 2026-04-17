@@ -115,7 +115,6 @@ export function ContactModal({
 
         <div className={styles.actions}>
           <Button
-            className={styles.cancelButton}
             buttonType="secondary"
             variant="label"
             type="button"
@@ -126,7 +125,7 @@ export function ContactModal({
           </Button>
           <Button
             className={styles.doneButton}
-            buttonType="secondary"
+            buttonType="primary"
             variant="label"
             type="submit"
             disabled={isSubmitting}

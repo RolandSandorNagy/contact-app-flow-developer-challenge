@@ -1,7 +1,7 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import { Button } from "../../ui/Button/Button";
-import { IconButton } from "../../ui/IconButton/IconButton";
 import defaultAvatarImage from "../../../assets/images/Default.png";
+import addIcon from "../../../assets/icons/Add.svg";
 import changeIcon from "../../../assets/icons/Change.svg";
 import deleteIcon from "../../../assets/icons/Delete.svg";
 import styles from "./AvatarPicker.module.css";
@@ -36,6 +36,9 @@ export function AvatarPicker({
 }: AvatarPickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
+  const hasAvatar = Boolean(avatar);
+  const pickButtonLabel = avatar ? "Change picture" : "Add picture";
+  const pickButtonIcon = hasAvatar ? changeIcon : addIcon;
 
   const handlePickClick = () => {
     if (!disabled) {
@@ -72,7 +75,7 @@ export function AvatarPicker({
         type="button"
         onClick={handlePickClick}
         disabled={disabled}
-        aria-label={avatar ? "Change picture" : "Upload picture"}
+        aria-label={pickButtonLabel}
       >
         <span className={styles.preview}>
           <img
@@ -97,27 +100,30 @@ export function AvatarPicker({
         />
         <Button
           className={styles.changeButton}
-          buttonType="secondary"
+          buttonType="primary"
           variant="labelIcon"
           type="button"
           onClick={handlePickClick}
           disabled={disabled}
+          aria-label={pickButtonLabel}
         >
           <span className={styles.changeButtonContent}>
-            <img src={changeIcon} alt="" className={styles.changeIcon} />
-            <span>{avatar ? "Change picture" : "Upload picture"}</span>
+            <img src={pickButtonIcon} alt="" className={styles.changeIcon} />
+            <span className={styles.changeButtonLabel}>{pickButtonLabel}</span>
           </span>
         </Button>
         {allowRemove && avatar ? (
-          <IconButton
+          <Button
             className={styles.removeButton}
+            buttonType="primary"
+            variant="icon"
             type="button"
             onClick={() => onChange(null)}
             disabled={disabled}
             aria-label="Remove picture"
           >
             <img src={deleteIcon} alt="" className={styles.removeIcon} />
-          </IconButton>
+          </Button>
         ) : null}
       </div>
 

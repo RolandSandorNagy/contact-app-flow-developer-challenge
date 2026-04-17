@@ -52,16 +52,16 @@
 
 .changeButton {
   min-height: var(--size-control-md);
-  border-radius: var(--radius-control);
-  padding: 0 16px 0 12px;
-  border: none;
-  background: var(--color-grid-line);
 }
 
 .changeButtonContent {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+}
+
+.changeButtonLabel {
+  display: inline;
 }
 
 .changeIcon {
@@ -73,19 +73,7 @@
 }
 
 .removeButton {
-  width: var(--size-control-md);
-  min-width: var(--size-control-md);
-  height: var(--size-control-md);
-  border-radius: var(--radius-control);
-  border: none;
-  background: var(--color-grid-line);
-  color: var(--fg-80);
-  padding: 8px;
-}
-
-.removeButton:hover:not(:disabled) {
-  background: var(--gray-70);
-  border-color: var(--gray-60);
+  min-height: var(--size-control-md);
 }
 
 .removeIcon {
@@ -105,4 +93,21 @@
   margin-top: 0.08rem;
   color: var(--danger-fg-strong);
   font-size: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .changeButton {
+    min-width: var(--size-control-md);
+    width: var(--size-control-md);
+    height: var(--size-control-md);
+    padding: 8px;
+  }
+
+  .changeButtonContent {
+    gap: 0;
+  }
+
+  .changeButtonLabel {
+    display: none;
+  }
 }

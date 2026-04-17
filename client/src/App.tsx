@@ -194,14 +194,15 @@ function App() {
 
             <Button
               className={styles.addButton}
-              buttonType="primary"
+              buttonType="special"
               variant="labelIcon"
               onClick={openAddModal}
+              aria-label="Add new contact"
             >
               <span className={styles.addPlus} aria-hidden="true">
                 <img src={addIcon} alt="" width="24" height="24" className={styles.addPlusIcon} />
               </span>
-              <span>Add new</span>
+              <span className={styles.addButtonLabel}>Add new</span>
             </Button>
           </div>
         </div>

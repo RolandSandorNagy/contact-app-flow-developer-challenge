@@ -56,22 +56,33 @@
   --input-bg-from: #1b1c20;
   --input-bg-to: #202125;
   --input-placeholder: rgba(255, 255, 255, 0.34);
-  --button-primary-bg-from: #282828;
-  --button-primary-bg-to: #282828;
-  --button-primary-border: #3c3c3c;
+  --button-primary-bg: #282828;
+  --button-primary-hover-bg: #2d2d2d;
+  --button-primary-active-bg: #323232;
+  --button-primary-border: transparent;
   --button-primary-color: var(--fg-100);
-  --button-primary-hover-from: #303030;
-  --button-primary-hover-to: #303030;
-  --button-primary-hover-border: #4a4a4a;
-  --button-primary-active-from: #242424;
-  --button-primary-active-to: #242424;
-  --button-primary-active-border: #3c3c3c;
+  --button-primary-hover-border: transparent;
+  --button-primary-active-border: transparent;
+  --button-special-base-layer: linear-gradient(0deg, #141414, #141414);
+  --button-special-depth-layer: linear-gradient(180deg, rgba(40, 40, 40, 0.7) 0%, #282828 100%);
+  --button-special-hover-overlay: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.04)
+  );
+  --button-special-border-gradient: linear-gradient(
+    180deg,
+    rgba(60, 60, 60, 1) 0%,
+    rgba(60, 60, 60, 0) 100%
+  );
+  --button-special-color: var(--fg-100);
   --ui-icon-filter: none;
 
   /* Shared sizing */
   --size-control-md: 40px;
   --size-control-lg: 48px;
   --size-list-item: 44px;
+  --radius-button: 8px;
   --radius-control: 10px;
 
   /* Cursor system (SVG + fallback) */
