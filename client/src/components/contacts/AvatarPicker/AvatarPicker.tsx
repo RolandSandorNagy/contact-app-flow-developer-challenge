@@ -82,7 +82,8 @@ export function AvatarPicker({
         />
         <Button
           className={styles.changeButton}
-          variant="secondary"
+          buttonType="secondary"
+          variant="labelIcon"
           type="button"
           onClick={handlePickClick}
           disabled={disabled}

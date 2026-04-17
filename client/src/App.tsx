@@ -127,7 +127,12 @@ function App() {
               </span>
             </div>
 
-            <Button className={styles.addButton} onClick={openAddModal}>
+            <Button
+              className={styles.addButton}
+              buttonType="primary"
+              variant="labelIcon"
+              onClick={openAddModal}
+            >
               <span className={styles.addPlus} aria-hidden="true">
                 <img src={addIcon} alt="" className={styles.addPlusIcon} />
               </span>
