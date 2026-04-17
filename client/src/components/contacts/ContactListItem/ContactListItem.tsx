@@ -37,7 +37,7 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
       </div>
 
       <div className={styles.info}>
-        <h3 className={styles.name}>{contact.name}</h3>
+        <p className={styles.name}>{contact.name}</p>
         <p className={styles.phone}>
           {contact.phone && telHref ? (
             <a href={telHref} className={styles.phoneLink}>
