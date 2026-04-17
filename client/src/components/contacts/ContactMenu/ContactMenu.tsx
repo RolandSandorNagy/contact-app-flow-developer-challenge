@@ -53,7 +53,7 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
   };
 
   return (
-    <div className={styles.menu} ref={menuRef}>
+    <div className={styles.menu} ref={menuRef} data-menu-open={isOpen ? "true" : "false"}>
       <IconButton
         aria-label="Contact actions"
         aria-expanded={isOpen}

@@ -1,4 +1,6 @@
 .item {
+  position: relative;
+  z-index: 0;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -103,6 +105,15 @@
   transform: translateX(0);
 }
 
+.item:hover,
+.item:focus-within {
+  z-index: 6;
+}
+
+.item:has([data-menu-open="true"]) {
+  z-index: 8;
+}
+
 @media (max-width: 640px) {
   .item {
     min-height: 42px;
@@ -136,6 +147,7 @@
     pointer-events: auto;
     gap: 4px;
     margin-left: 2px;
+    transform: none;
   }
 
   .actionIcon {
