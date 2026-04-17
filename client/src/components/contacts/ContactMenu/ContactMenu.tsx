@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { IconButton } from "../../ui/IconButton/IconButton";
 import moreIcon from "../../../assets/icons/More.svg";
 import editIcon from "../../../assets/icons/Change.svg";
@@ -17,10 +17,18 @@ interface ContactMenuProps {
 export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const closeMenu = useCallback(() => {
+    setIsOpen(false);
+    onOpenChange?.(false);
+  }, [onOpenChange]);
 
-  useEffect(() => {
-    onOpenChange?.(isOpen);
-  }, [isOpen, onOpenChange]);
+  const toggleMenu = useCallback(() => {
+    setIsOpen((previous) => {
+      const next = !previous;
+      onOpenChange?.(next);
+      return next;
+    });
+  }, [onOpenChange]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -29,13 +37,13 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
 
     const handleOutsideClick = (event: MouseEvent) => {
       if (!menuRef.current?.contains(event.target as Node)) {
-        setIsOpen(false);
+        closeMenu();
       }
     };
 
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        closeMenu();
       }
     };
 
@@ -45,16 +53,16 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
       document.removeEventListener("mousedown", handleOutsideClick);
       document.removeEventListener("keydown", handleEscape);
     };
-  }, [isOpen]);
+  }, [isOpen, closeMenu]);
 
   const handleEdit = () => {
     onEdit();
-    setIsOpen(false);
+    closeMenu();
   };
 
   const handleRemove = () => {
     onRemove();
-    setIsOpen(false);
+    closeMenu();
   };
 
   return (
@@ -64,7 +72,7 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
         aria-expanded={isOpen}
         aria-haspopup="true"
         className={styles.trigger}
-        onClick={() => setIsOpen((previous) => !previous)}
+        onClick={toggleMenu}
       >
         <img src={moreIcon} alt="" className={styles.moreIcon} />
       </IconButton>

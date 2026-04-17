@@ -28,8 +28,7 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
   const avatarSource = contact.avatar ?? defaultAvatarImage;
   const telHref = contact.phone ? createTelHref(contact.phone) : null;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const itemClassName = [styles.item, isMenuOpen ? styles.itemMenuOpen : ""].join(" ").trim();
+  const itemClassName = `${styles.item}${isMenuOpen ? ` ${styles.itemMenuOpen}` : ""}`;
 
   return (
     <li className={itemClassName}>

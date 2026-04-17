@@ -41,13 +41,19 @@ async function startServer() {
 startServer();
 
 function closeHttpServer() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     if (!httpServer) {
       resolve(undefined);
       return;
     }
 
-    httpServer.close(() => resolve(undefined));
+    httpServer.close((error) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(undefined);
+    });
   });
 }
 

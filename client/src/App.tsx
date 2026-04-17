@@ -17,6 +17,10 @@ import settingsIcon from "./assets/icons/Settings.svg";
 import headerProfileImage from "./assets/images/Jacqueline.png";
 import styles from "./App.module.css";
 
+function getErrorMessage(error: unknown, fallback: string) {
+  return error instanceof Error ? error.message : fallback;
+}
+
 function App() {
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,7 +36,7 @@ function App() {
       const response = await getContacts();
       setContacts(response);
     } catch (loadError) {
-      setError(loadError instanceof Error ? loadError.message : "Failed to load contacts.");
+      setError(getErrorMessage(loadError, "Failed to load contacts."));
     } finally {
       setIsLoading(false);
     }
@@ -79,7 +83,7 @@ function App() {
       setIsModalOpen(false);
       setEditingContact(null);
     } catch (submitError) {
-      setError(submitError instanceof Error ? submitError.message : "Unable to save contact.");
+      setError(getErrorMessage(submitError, "Unable to save contact."));
     } finally {
       setIsSaving(false);
     }
@@ -93,7 +97,7 @@ function App() {
         previousContacts.filter((contact) => contact.id !== contactId)
       );
     } catch (removeError) {
-      setError(removeError instanceof Error ? removeError.message : "Unable to remove contact.");
+      setError(getErrorMessage(removeError, "Unable to remove contact."));
     }
   };
 

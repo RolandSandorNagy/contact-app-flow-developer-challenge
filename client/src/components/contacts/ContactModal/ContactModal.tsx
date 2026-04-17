@@ -78,12 +78,7 @@ export function ContactModal({
     >
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={`${styles.section} ${styles.avatarSection}`}>
-          <AvatarPicker
-            avatar={avatar}
-            disabled={isSubmitting}
-            allowRemove={true}
-            onChange={setAvatar}
-          />
+          <AvatarPicker avatar={avatar} disabled={isSubmitting} allowRemove onChange={setAvatar} />
         </div>
 
         <div className={styles.section}>
