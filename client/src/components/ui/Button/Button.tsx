@@ -16,6 +16,7 @@ function toClassSuffix(value: string) {
 export function Button({
   buttonType = "secondary",
   variant = "label",
+  type = "button",
   className = "",
   ...props
 }: ButtonProps) {
@@ -25,5 +26,5 @@ export function Button({
     .join(" ")
     .trim();
 
-  return <button className={resolvedClassName} {...props} />;
+  return <button type={type} className={resolvedClassName} {...props} />;
 }

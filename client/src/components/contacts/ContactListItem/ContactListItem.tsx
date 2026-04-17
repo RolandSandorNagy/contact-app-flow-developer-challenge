@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Contact } from "../../../types/contact";
 import { ContactMenu } from "../ContactMenu/ContactMenu";
 import defaultAvatarImage from "../../../assets/images/Default.png";
@@ -26,9 +27,12 @@ function createTelHref(phone: string) {
 export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemProps) {
   const avatarSource = contact.avatar ?? defaultAvatarImage;
   const telHref = contact.phone ? createTelHref(contact.phone) : null;
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const itemClassName = [styles.item, isMenuOpen ? styles.itemMenuOpen : ""].join(" ").trim();
 
   return (
-    <li className={styles.item}>
+    <li className={itemClassName}>
       <div className={styles.avatar}>
         <img src={avatarSource} alt={`${contact.name} avatar`} className={styles.avatarImage} />
       </div>
@@ -53,7 +57,7 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
         <span className={styles.actionIcon} aria-hidden="true">
           <img src={callIcon} alt="" className={styles.actionIconImage} />
         </span>
-        <ContactMenu onEdit={onEdit} onRemove={onRemove} />
+        <ContactMenu onEdit={onEdit} onRemove={onRemove} onOpenChange={setIsMenuOpen} />
       </div>
     </li>
   );

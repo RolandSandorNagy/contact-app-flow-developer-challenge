@@ -11,11 +11,16 @@ import styles from "./ContactMenu.module.css";
 interface ContactMenuProps {
   onEdit: () => void;
   onRemove: () => void;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
-export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
+export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    onOpenChange?.(isOpen);
+  }, [isOpen, onOpenChange]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -53,10 +58,11 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
   };
 
   return (
-    <div className={styles.menu} ref={menuRef} data-menu-open={isOpen ? "true" : "false"}>
+    <div className={styles.menu} ref={menuRef}>
       <IconButton
         aria-label="Contact actions"
         aria-expanded={isOpen}
+        aria-haspopup="true"
         className={styles.trigger}
         onClick={() => setIsOpen((previous) => !previous)}
       >
@@ -64,28 +70,27 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
       </IconButton>
 
       {isOpen ? (
-        <div className={styles.dropdown} role="menu">
-          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} role="menuitem" disabled>
+        <div className={styles.dropdown}>
+          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
             <img src={muteIcon} alt="" className={styles.itemIcon} />
             <span>Mute</span>
           </button>
-          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} role="menuitem" disabled>
+          <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
             <img src={callIcon} alt="" className={styles.itemIcon} />
             <span>Call</span>
           </button>
 
-          <button type="button" className={styles.item} role="menuitem" onClick={handleEdit}>
+          <button type="button" className={styles.item} onClick={handleEdit}>
             <img src={editIcon} alt="" className={styles.itemIcon} />
             <span>Edit</span>
           </button>
-          <button type="button" className={styles.item} role="menuitem" disabled>
+          <button type="button" className={styles.item} disabled>
             <img src={favouriteIcon} alt="" className={styles.itemIcon} />
             <span>Favourite</span>
           </button>
           <button
             type="button"
             className={`${styles.item} ${styles.remove}`}
-            role="menuitem"
             onClick={handleRemove}
           >
             <img src={removeIcon} alt="" className={styles.itemIcon} />

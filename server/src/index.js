@@ -5,6 +5,8 @@ const { db, initializeDatabase } = require("./db");
 
 const app = express();
 const port = process.env.PORT || 4000;
+let httpServer;
+let isShuttingDown = false;
 
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
@@ -27,7 +29,7 @@ async function startServer() {
       console.log(`Seeded ${seededCount} contacts.`);
     }
 
-    app.listen(port, () => {
+    httpServer = app.listen(port, () => {
       console.log(`Server listening on http://localhost:${port}`);
     });
   } catch (error) {
@@ -38,7 +40,51 @@ async function startServer() {
 
 startServer();
 
+function closeHttpServer() {
+  return new Promise((resolve) => {
+    if (!httpServer) {
+      resolve(undefined);
+      return;
+    }
+
+    httpServer.close(() => resolve(undefined));
+  });
+}
+
+function closeDatabase() {
+  return new Promise((resolve, reject) => {
+    db.close((error) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(undefined);
+    });
+  });
+}
+
+async function shutdown(signal) {
+  if (isShuttingDown) {
+    return;
+  }
+
+  isShuttingDown = true;
+  console.log(`Received ${signal}. Shutting down...`);
+
+  try {
+    await closeHttpServer();
+    await closeDatabase();
+    process.exit(0);
+  } catch (error) {
+    console.error("Shutdown failed.", error);
+    process.exit(1);
+  }
+}
+
 process.on("SIGINT", () => {
-  db.close();
-  process.exit(0);
+  void shutdown("SIGINT");
+});
+
+process.on("SIGTERM", () => {
+  void shutdown("SIGTERM");
 });

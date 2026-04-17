@@ -38,10 +38,6 @@
   overflow: hidden;
 }
 
-.mobileOnlyItem {
-  display: none;
-}
-
 .item {
   width: 100%;
   border: none;
@@ -60,6 +56,10 @@
   gap: 12px;
   cursor: var(--cursor-pointer);
   transition: background-color 0.15s ease;
+}
+
+.item.mobileOnlyItem {
+  display: none;
 }
 
 .itemIcon {
@@ -104,7 +104,7 @@
     right: 0;
   }
 
-  .mobileOnlyItem {
+  .item.mobileOnlyItem {
     display: inline-flex;
   }
 }

@@ -6,11 +6,11 @@ interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function IconButton({ className = "", children, ...props }: IconButtonProps) {
+  const { type = "button", ...restProps } = props;
   const resolvedClassName = [styles.button, className].join(" ").trim();
   return (
-    <button type="button" className={resolvedClassName} {...props}>
+    <button type={type} className={resolvedClassName} {...restProps}>
       {children}
     </button>
   );
 }
-

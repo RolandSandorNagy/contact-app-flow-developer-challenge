@@ -2,12 +2,31 @@ import type { Contact, ContactPayload } from "../types/contact";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000";
 
+function safeParseJson(value: string) {
+  try {
+    return JSON.parse(value) as unknown;
+  } catch {
+    return null;
+  }
+}
+
 async function parseResponse<T>(response: Response): Promise<T> {
   if (response.status === 204) {
     return undefined as T;
   }
 
-  const data: unknown = await response.json();
+  const contentType = response.headers.get("content-type") ?? "";
+  const isJson = contentType.includes("application/json");
+  const rawBody = await response.text();
+
+  let data: unknown = rawBody;
+  if (isJson && rawBody) {
+    data = safeParseJson(rawBody);
+    if (data === null && response.ok) {
+      throw new Error("Invalid server response.");
+    }
+  }
+
   if (!response.ok) {
     const message =
       typeof data === "object" &&
@@ -15,8 +34,14 @@ async function parseResponse<T>(response: Response): Promise<T> {
       "message" in data &&
       typeof (data as { message?: unknown }).message === "string"
         ? (data as { message: string }).message
-        : undefined;
-    throw new Error(message || "Request failed.");
+        : typeof data === "string" && data.trim().length > 0
+          ? data
+          : undefined;
+    throw new Error(message || response.statusText || "Request failed.");
+  }
+
+  if (data === null || data === "") {
+    return undefined as T;
   }
 
   return data as T;

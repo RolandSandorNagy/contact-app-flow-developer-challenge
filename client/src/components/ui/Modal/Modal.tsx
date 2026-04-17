@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useId, type ReactNode } from "react";
 import { IconButton } from "../IconButton/IconButton";
 import styles from "./Modal.module.css";
 
@@ -19,6 +19,8 @@ export function Modal({
   showCloseButton = true,
   children
 }: ModalProps) {
+  const titleId = useId();
+
   useEffect(() => {
     if (!isOpen || disableClose) {
       return;
@@ -46,9 +48,17 @@ export function Modal({
 
   return (
     <div className={styles.overlay} onClick={handleOverlayClick} role="presentation">
-      <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
+      <div
+        className={styles.modal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
+          <h2 id={titleId} className={styles.title}>
+            {title}
+          </h2>
           {showCloseButton ? (
             <IconButton
               className={styles.closeButton}

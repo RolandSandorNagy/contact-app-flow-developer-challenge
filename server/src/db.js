@@ -142,11 +142,18 @@ async function initializeDatabase() {
     return 0;
   }
 
-  for (const contact of seedContacts) {
-    await run(
-      "INSERT INTO contacts (name, phone, email, avatar) VALUES (?, ?, ?, ?)",
-      [contact.name, contact.phone, contact.email, contact.avatar]
-    );
+  await run("BEGIN TRANSACTION");
+  try {
+    for (const contact of seedContacts) {
+      await run(
+        "INSERT INTO contacts (name, phone, email, avatar) VALUES (?, ?, ?, ?)",
+        [contact.name, contact.phone, contact.email, contact.avatar]
+      );
+    }
+    await run("COMMIT");
+  } catch (error) {
+    await run("ROLLBACK");
+    throw error;
   }
 
   return seedContacts.length;

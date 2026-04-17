@@ -110,7 +110,7 @@
   z-index: 6;
 }
 
-.item:has([data-menu-open="true"]) {
+.itemMenuOpen {
   z-index: 8;
 }
 
