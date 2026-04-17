@@ -1,0 +1,57 @@
+.menu {
+  position: relative;
+}
+
+.trigger {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.dotIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.dotIcon > span {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.92;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.32rem);
+  right: 0;
+  min-width: 122px;
+  padding: 0.25rem;
+  border-radius: 9px;
+  border: 1px solid #353a48;
+  background: linear-gradient(180deg, #1a1d25 0%, #171920 100%);
+  box-shadow: 0 18px 34px rgba(0, 0, 0, 0.5);
+  z-index: 12;
+}
+
+.item {
+  width: 100%;
+  border: none;
+  border-radius: 7px;
+  padding: 0.45rem 0.55rem;
+  text-align: left;
+  background: transparent;
+  color: #e8eaf0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #272b35;
+}
+
+.remove {
+  color: #ffacb3;
+}

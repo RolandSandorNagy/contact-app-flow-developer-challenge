@@ -1,0 +1,55 @@
+# Contact App Flow - Developer Challenge
+
+## Description
+Full-stack contact management app built for the UX Studio developer challenge, focusing on clean UI, reusable components, and smooth CRUD flows.
+
+The app supports adding, editing, and removing contacts, with avatar upload and responsive layout.
+
+## Tech Stack
+- Frontend: React, TypeScript, Vite, CSS Modules
+- Backend: Node.js, Express, SQLite (`sqlite3`)
+
+## Run locally
+### 1. Install dependencies
+```bash
+cd server
+npm install
+
+cd ../client
+npm install
+```
+
+### 2. Start backend
+```bash
+cd server
+npm run dev
+```
+Backend URL: `http://localhost:4000`
+
+### 3. Start frontend
+```bash
+cd client
+npm run dev
+```
+Frontend URL (default): `http://localhost:5173`
+
+## Database notes
+- SQLite database file is created at `server/data/contacts.db`.
+- Table: `contacts`
+- Columns: `id`, `name`, `phone`, `email`, `avatar`
+- API returns contacts ordered by ascending `id`.
+- `avatar` is stored as a base64 string in SQLite.
+- Only `name` is required; `phone`, `email`, and `avatar` are optional.
+
+## Seed data
+- On server startup, seed contacts are inserted automatically only when the `contacts` table is empty.
+- Seed records include a mix of:
+  - `avatar = null`
+  - phone only
+  - email only
+  - both phone and email
+
+## What I would improve next
+- Add lightweight API tests for CRUD endpoints.
+- Add search and pagination support for larger contact lists.
+- Add avatar size constraints/compression before storing base64 data.

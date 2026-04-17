@@ -1,0 +1,33 @@
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.section {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.sectionLabel {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #98a0b2;
+  text-transform: uppercase;
+  letter-spacing: 0.045em;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid #242938;
+}
+
+.error {
+  margin: -0.08rem 0 0;
+  color: #ff97a1;
+  font-size: 0.76rem;
+}

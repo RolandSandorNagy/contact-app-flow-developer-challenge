@@ -1,0 +1,44 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+.preview {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid #343a4a;
+  background-color: #282d3a;
+  color: #d6dbea;
+  display: grid;
+  place-items: center;
+  font-weight: 650;
+  font-size: 0.73rem;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  flex-wrap: wrap;
+}
+
+.fileInput {
+  display: none;
+}
+
+.error {
+  grid-column: 1 / -1;
+  margin-top: 0.08rem;
+  color: #ff98a0;
+  font-size: 0.75rem;
+}

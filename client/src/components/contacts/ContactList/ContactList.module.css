@@ -1,0 +1,16 @@
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-radius: 11px;
+  overflow: hidden;
+}
+
+.empty {
+  color: #8b91a0;
+  font-size: 0.85rem;
+  padding: 1.45rem 0.9rem;
+  text-align: center;
+}

@@ -1,0 +1,32 @@
+.wrapper {
+  display: grid;
+  gap: 0.34rem;
+}
+
+.label {
+  font-size: 0.76rem;
+  color: #9da4b5;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.input {
+  width: 100%;
+  min-height: 36px;
+  border-radius: 8px;
+  border: 1px solid #313746;
+  padding: 0.48rem 0.62rem;
+  font-size: 0.86rem;
+  color: #eff1f6;
+  background-color: #171b24;
+}
+
+.input:focus {
+  outline: 2px solid #3f4759;
+  outline-offset: 1px;
+  border-color: #495165;
+}
+
+.input::placeholder {
+  color: #7d8494;
+}

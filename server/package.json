@@ -1,0 +1,20 @@
+{
+  "name": "contact-app-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express + SQLite backend for contact management app",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
+

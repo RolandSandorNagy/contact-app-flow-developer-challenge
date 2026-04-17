@@ -1,0 +1,28 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #2f3440;
+  border-radius: 8px;
+  background: #181a21;
+  color: #a8adbb;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.button:hover {
+  color: #f3f5f8;
+  background-color: #20232b;
+  border-color: #3a3f4d;
+}
+
+.button:focus-visible {
+  outline: 2px solid #454d5f;
+  outline-offset: 1px;
+}
