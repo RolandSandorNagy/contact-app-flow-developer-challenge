@@ -1,32 +1,50 @@
 .wrapper {
   display: grid;
-  gap: 0.34rem;
+  gap: 6px;
 }
 
 .label {
-  font-size: 0.76rem;
-  color: #9da4b5;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  font-weight: var(--body-weight);
+  letter-spacing: var(--message-letter);
+  color: var(--fg-56);
 }
 
 .input {
   width: 100%;
-  min-height: 36px;
+  min-height: 40px;
   border-radius: 8px;
-  border: 1px solid #313746;
-  padding: 0.48rem 0.62rem;
-  font-size: 0.86rem;
-  color: #eff1f6;
-  background-color: #171b24;
+  border: 1px solid #2b2d31;
+  padding: 0 12px;
+  font-size: var(--body-size);
+  line-height: var(--body-line);
+  letter-spacing: var(--body-letter);
+  font-weight: var(--body-weight);
+  color: var(--fg-100);
+  background: linear-gradient(90deg, #1b1c20 0%, #202125 100%);
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .input:focus {
-  outline: 2px solid #3f4759;
-  outline-offset: 1px;
-  border-color: #495165;
+  outline: none;
+  border-color: #3a3d44;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03);
 }
 
 .input::placeholder {
-  color: #7d8494;
+  color: rgba(255, 255, 255, 0.34);
+}
+
+.input[placeholder]:not(:placeholder-shown) {
+  color: var(--fg-100);
+}
+
+.input:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
 }

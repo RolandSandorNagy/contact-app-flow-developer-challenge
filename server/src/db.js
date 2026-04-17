@@ -4,36 +4,76 @@ const sqlite3 = require("sqlite3").verbose();
 
 const dataDirectory = path.join(__dirname, "..", "data");
 const databasePath = path.join(dataDirectory, "contacts.db");
+const imagesDirectory = path.join(
+  __dirname,
+  "..",
+  "..",
+  "client",
+  "src",
+  "assets",
+  "images"
+);
+
+const imageMimeTypes = {
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".svg": "image/svg+xml"
+};
+
+function readImageAsDataUri(fileName) {
+  if (!fileName) {
+    return null;
+  }
+
+  const imagePath = path.join(imagesDirectory, fileName);
+  if (!fs.existsSync(imagePath)) {
+    return null;
+  }
+
+  const extension = path.extname(imagePath).toLowerCase();
+  const mimeType = imageMimeTypes[extension] ?? "application/octet-stream";
+  const imageBuffer = fs.readFileSync(imagePath);
+  return `data:${mimeType};base64,${imageBuffer.toString("base64")}`;
+}
+
+const defaultSeedAvatar = readImageAsDataUri("Default.png");
+
+function resolveSeedAvatar(fileName) {
+  return readImageAsDataUri(fileName) ?? defaultSeedAvatar;
+}
+
 const seedContacts = [
   {
-    name: "Ava Johnson",
-    phone: "+1 415 555 0147",
-    email: "ava.johnson@example.com",
-    avatar: null
-  },
-  {
-    name: "Noah Kim",
-    phone: "+1 212 555 0188",
+    name: "Timothy Lewis",
+    phone: "+36 01 234 5678",
     email: null,
-    avatar: null
+    avatar: resolveSeedAvatar("Timothy.png")
   },
   {
-    name: "Priya Patel",
-    phone: null,
-    email: "priya.patel@example.com",
-    avatar: null
-  },
-  {
-    name: "Luca Moretti",
-    phone: "+1 310 555 0102",
-    email: "luca.moretti@example.com",
-    avatar: null
-  },
-  {
-    name: "Elena Petrova",
-    phone: null,
+    name: "Sarah Wright",
+    phone: "+36 01 234 5678",
     email: null,
-    avatar: null
+    avatar: resolveSeedAvatar("Sarah.png")
+  },
+  {
+    name: "Lucy Jones",
+    phone: "+36 01 234 5678",
+    email: null,
+    avatar: resolveSeedAvatar("Lucy.png")
+  },
+  {
+    name: "Jake Perez",
+    phone: "+36 01 234 5678",
+    email: null,
+    avatar: resolveSeedAvatar("Jake.png")
+  },
+  {
+    name: "Adebayo Rodriguez",
+    phone: "+36 01 234 5678",
+    email: null,
+    avatar: resolveSeedAvatar("Adebayo.png")
   }
 ];
 

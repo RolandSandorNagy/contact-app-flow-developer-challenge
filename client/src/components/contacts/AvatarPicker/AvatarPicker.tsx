@@ -1,27 +1,16 @@
 import { useRef, useState, type ChangeEvent } from "react";
 import { Button } from "../../ui/Button/Button";
+import { IconButton } from "../../ui/IconButton/IconButton";
+import defaultAvatarImage from "../../../assets/images/Default.png";
+import changeIcon from "../../../assets/icons/Change.svg";
+import deleteIcon from "../../../assets/icons/Delete.svg";
 import styles from "./AvatarPicker.module.css";
 
 interface AvatarPickerProps {
   avatar: string | null;
-  name: string;
   disabled?: boolean;
   allowRemove?: boolean;
   onChange: (nextAvatar: string | null) => void;
-}
-
-function getInitials(name: string) {
-  if (!name.trim()) {
-    return "??";
-  }
-
-  return name
-    .trim()
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((part) => part[0]?.toUpperCase() ?? "")
-    .join("");
 }
 
 function readImageAsBase64(file: File) {
@@ -41,7 +30,6 @@ function readImageAsBase64(file: File) {
 
 export function AvatarPicker({
   avatar,
-  name,
   disabled = false,
   allowRemove = false,
   onChange
@@ -80,11 +68,7 @@ export function AvatarPicker({
   return (
     <div className={styles.wrapper}>
       <div className={styles.preview}>
-        {avatar ? (
-          <img className={styles.image} src={avatar} alt={name ? `${name} avatar` : "Avatar preview"} />
-        ) : (
-          <span>{getInitials(name)}</span>
-        )}
+        <img className={styles.image} src={avatar ?? defaultAvatarImage} alt="Avatar preview" />
       </div>
 
       <div className={styles.actions}>
@@ -96,13 +80,28 @@ export function AvatarPicker({
           onChange={handleFileSelect}
           disabled={disabled}
         />
-        <Button variant="secondary" type="button" onClick={handlePickClick} disabled={disabled}>
-          {avatar ? "Change picture" : "Upload picture"}
+        <Button
+          className={styles.changeButton}
+          variant="secondary"
+          type="button"
+          onClick={handlePickClick}
+          disabled={disabled}
+        >
+          <span className={styles.changeButtonContent}>
+            <img src={changeIcon} alt="" className={styles.changeIcon} />
+            <span>{avatar ? "Change picture" : "Upload picture"}</span>
+          </span>
         </Button>
         {allowRemove && avatar ? (
-          <Button type="button" variant="ghost" onClick={() => onChange(null)} disabled={disabled}>
-            Remove
-          </Button>
+          <IconButton
+            className={styles.removeButton}
+            type="button"
+            onClick={() => onChange(null)}
+            disabled={disabled}
+            aria-label="Remove picture"
+          >
+            <img src={deleteIcon} alt="" className={styles.removeIcon} />
+          </IconButton>
         ) : null}
       </div>
 

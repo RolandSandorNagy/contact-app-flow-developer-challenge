@@ -1,33 +1,68 @@
 .form {
   display: grid;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .section {
   display: grid;
-  gap: 0.38rem;
+  gap: 0.46rem;
 }
 
-.sectionLabel {
-  margin: 0;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: #98a0b2;
-  text-transform: uppercase;
-  letter-spacing: 0.045em;
+.avatarSection {
+  margin-bottom: 0.25rem;
+}
+
+.fieldInput {
+  min-height: 48px;
+  border-radius: 10px;
 }
 
 .actions {
   display: flex;
   justify-content: flex-end;
-  gap: 0.5rem;
-  margin-top: 0.35rem;
-  padding-top: 0.7rem;
-  border-top: 1px solid #242938;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.cancelButton {
+  min-height: 48px;
+  padding: 0 0.45rem;
+  background: transparent;
+  border-color: transparent;
+  color: var(--fg-100);
+  font-size: var(--h3-size);
+  line-height: var(--h3-line);
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: transparent;
+  color: var(--fg-100);
+}
+
+.doneButton {
+  min-height: 48px;
+  padding: 0 1.15rem;
+  border-radius: 10px;
+  font-size: var(--h3-size);
+  line-height: var(--h3-line);
+  border: none;
+  border-color: transparent;
+}
+
+.doneButton:hover:not(:disabled) {
+  border: none;
+  border-color: transparent;
+}
+
+.doneButton:active:not(:disabled) {
+  border: none;
+  border-color: transparent;
 }
 
 .error {
-  margin: -0.08rem 0 0;
-  color: #ff97a1;
-  font-size: 0.76rem;
+  margin: -0.02rem 0 0;
+  color: var(--danger-fg-strong);
+  font-size: var(--message-size);
+  line-height: var(--message-line);
 }

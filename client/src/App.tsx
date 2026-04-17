@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { ContactList } from "./components/contacts/ContactList/ContactList";
 import { Button } from "./components/ui/Button/Button";
-import { IconButton } from "./components/ui/IconButton/IconButton";
 import { ContactModal } from "./components/contacts/ContactModal/ContactModal";
 import {
   createContact,
@@ -11,6 +10,11 @@ import {
 } from "./services/contactsApi";
 import type { Contact } from "./types/contact";
 import type { ContactPayload } from "./types/contact";
+import addIcon from "./assets/icons/Add.svg";
+import backArrowIcon from "./assets/icons/BackArrow.svg";
+import lightModeIcon from "./assets/icons/LightMode.svg";
+import settingsIcon from "./assets/icons/Settings.svg";
+import headerProfileImage from "./assets/images/Jacqueline.png";
 import styles from "./App.module.css";
 
 function App() {
@@ -96,24 +100,38 @@ function App() {
   return (
     <div className={styles.app}>
       <header className={styles.topBar}>
-        <div className={styles.topLeft}>
+        <div className={styles.headerLeftCell}>
           <span className={styles.backIcon} aria-hidden="true">
-            <span className={styles.backIconGlyph}>{"<"}</span>
+            <img src={backArrowIcon} alt="" className={styles.iconImage} />
           </span>
-          <h1 className={styles.title}>Contacts</h1>
         </div>
 
-        <div className={styles.topRight}>
-          <IconButton className={styles.chromeButton} aria-hidden="true" tabIndex={-1}>
-            <span className={styles.chromeGlyphSquare} />
-          </IconButton>
-          <IconButton className={styles.chromeButton} aria-hidden="true" tabIndex={-1}>
-            <span className={styles.chromeGlyphLines} />
-          </IconButton>
+        <div className={styles.headerCenterCell}>
+          <h1 className={styles.title}>Contacts</h1>
 
-          <Button className={styles.addButton} onClick={openAddModal}>
-            Add new
-          </Button>
+          <div className={styles.headerControlsBox}>
+            <div className={styles.headerControlsBoxIcons}>
+              <span className={styles.headerIcon} aria-hidden="true">
+                <img src={settingsIcon} alt="" className={styles.iconImage} />
+              </span>
+              <span className={styles.headerAvatar} aria-hidden="true">
+                <img src={headerProfileImage} alt="" className={styles.headerAvatarImage} />
+              </span>
+            </div>
+
+            <Button className={styles.addButton} onClick={openAddModal}>
+              <span className={styles.addPlus} aria-hidden="true">
+                <img src={addIcon} alt="" className={styles.addPlusIcon} />
+              </span>
+              <span>Add new</span>
+            </Button>
+          </div>
+        </div>
+
+        <div className={styles.headerRightCell}>
+          <span className={styles.headerIcon} aria-hidden="true">
+            <img src={lightModeIcon} alt="" className={styles.iconImage} />
+          </span>
         </div>
       </header>
 

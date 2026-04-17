@@ -7,10 +7,18 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   disableClose?: boolean;
+  showCloseButton?: boolean;
   children: ReactNode;
 }
 
-export function Modal({ title, isOpen, onClose, disableClose = false, children }: ModalProps) {
+export function Modal({
+  title,
+  isOpen,
+  onClose,
+  disableClose = false,
+  showCloseButton = true,
+  children
+}: ModalProps) {
   useEffect(() => {
     if (!isOpen || disableClose) {
       return;
@@ -41,14 +49,16 @@ export function Modal({ title, isOpen, onClose, disableClose = false, children }
       <div className={styles.modal} onClick={(event) => event.stopPropagation()}>
         <div className={styles.header}>
           <h2 className={styles.title}>{title}</h2>
-          <IconButton
-            className={styles.closeButton}
-            onClick={onClose}
-            disabled={disableClose}
-            aria-label="Close modal"
-          >
-            <span className={styles.closeIcon}>x</span>
-          </IconButton>
+          {showCloseButton ? (
+            <IconButton
+              className={styles.closeButton}
+              onClick={onClose}
+              disabled={disableClose}
+              aria-label="Close modal"
+            >
+              <span className={styles.closeIcon}>x</span>
+            </IconButton>
+          ) : null}
         </div>
         <div className={styles.content}>{children}</div>
       </div>

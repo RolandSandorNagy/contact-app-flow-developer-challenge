@@ -69,12 +69,16 @@ export function ContactModal({
   const title = mode === "add" ? "Add contact" : "Edit contact";
 
   return (
-    <Modal title={title} isOpen={isOpen} onClose={onClose} disableClose={isSubmitting}>
+    <Modal
+      title={title}
+      isOpen={isOpen}
+      onClose={onClose}
+      disableClose={isSubmitting}
+      showCloseButton={false}
+    >
       <form className={styles.form} onSubmit={handleSubmit}>
-        <div className={styles.section}>
-          <p className={styles.sectionLabel}>Image</p>
+        <div className={`${styles.section} ${styles.avatarSection}`}>
           <AvatarPicker
-            name={name}
             avatar={avatar}
             disabled={isSubmitting}
             allowRemove={mode === "edit"}
@@ -86,6 +90,8 @@ export function ContactModal({
           <Input
             label="Name"
             value={name}
+            placeholder="Example"
+            className={styles.fieldInput}
             onChange={(event) => setName(event.target.value)}
             required
             disabled={isSubmitting}
@@ -96,6 +102,8 @@ export function ContactModal({
         <Input
           label="Phone number"
           value={phone}
+          placeholder="Example"
+          className={styles.fieldInput}
           onChange={(event) => setPhone(event.target.value)}
           disabled={isSubmitting}
         />
@@ -104,15 +112,23 @@ export function ContactModal({
           label="Email address"
           type="email"
           value={email}
+          placeholder="Example"
+          className={styles.fieldInput}
           onChange={(event) => setEmail(event.target.value)}
           disabled={isSubmitting}
         />
 
         <div className={styles.actions}>
-          <Button variant="ghost" type="button" onClick={onClose} disabled={isSubmitting}>
+          <Button
+            className={styles.cancelButton}
+            variant="ghost"
+            type="button"
+            onClick={onClose}
+            disabled={isSubmitting}
+          >
             Cancel
           </Button>
-          <Button type="submit" disabled={isSubmitting}>
+          <Button className={styles.doneButton} variant="secondary" type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Saving..." : "Done"}
           </Button>
         </div>

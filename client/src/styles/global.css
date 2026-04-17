@@ -1,7 +1,76 @@
+@font-face {
+  font-family: "Lexend Deca Custom";
+  src: url("../assets/fonts/LexendDeca-VariableFont_wght.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Glysa";
+  src: url("../assets/fonts/Glysa.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
 :root {
-  font-family: "Inter", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
-  color: #f2f3f6;
-  background-color: #0e0f13;
+  --font-heading: "Glysa", "Times New Roman", serif;
+  --font-body: "Lexend Deca Custom", "Segoe UI", system-ui, sans-serif;
+
+  /* Neutral shade scale (100 = darkest, 10 = lightest) */
+  --gray-100: #0d0e11;
+  --gray-90: #141519;
+  --gray-80: #1a1c21;
+  --gray-70: #21242a;
+  --gray-60: #292d34;
+  --gray-50: #32363e;
+  --gray-40: #3b4049;
+  --gray-30: #474c56;
+  --gray-20: #575c66;
+  --gray-10: #6b707a;
+
+  /* Foreground on 20-shade surfaces */
+  --fg-100: rgba(255, 255, 255, 1);
+  --fg-80: rgba(255, 255, 255, 0.8);
+  --fg-56: rgba(255, 255, 255, 0.56);
+  --fg-32: rgba(255, 255, 255, 0.32);
+
+  --danger-fg: #ffacb3;
+  --danger-fg-strong: #ff97a1;
+  --danger-bg: #2a1b1e;
+  --danger-bg-hover: #3b2026;
+  --danger-border: #55333a;
+  --danger-border-hover: #6a3a43;
+
+  --h1-size: 32px;
+  --h1-line: 48px;
+  --h1-weight: 500;
+  --h1-letter: 0;
+
+  --h2-size: 24px;
+  --h2-line: 40px;
+  --h2-weight: 500;
+  --h2-letter: 0;
+
+  --h3-size: 16px;
+  --h3-line: 24px;
+  --h3-weight: 400;
+  --h3-letter: 0.01em;
+
+  --body-size: 14px;
+  --body-line: 20px;
+  --body-weight: 400;
+  --body-letter: 0.01em;
+
+  --message-size: 12px;
+  --message-line: 16px;
+  --message-weight: 400;
+  --message-letter: 0.01em;
+
+  font-family: var(--font-body);
+  color: var(--fg-100);
+  background-color: var(--gray-100);
 }
 
 * {
@@ -11,12 +80,10 @@
 body {
   margin: 0;
   min-height: 100vh;
-  color: #f2f3f6;
-  background:
-    radial-gradient(980px circle at 50% -20%, #1b1d27 0%, transparent 60%),
-    radial-gradient(760px circle at 90% 6%, #161922 0%, transparent 62%),
-    radial-gradient(760px circle at 10% 2%, #141820 0%, transparent 60%),
-    #0e0f13;
+  color: var(--fg-100);
+  font-family: var(--font-body);
+  font-weight: var(--body-weight);
+  background: var(--gray-100);
 }
 
 #root {

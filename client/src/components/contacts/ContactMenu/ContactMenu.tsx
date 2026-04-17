@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { IconButton } from "../../ui/IconButton/IconButton";
+import moreIcon from "../../../assets/icons/More.svg";
+import editIcon from "../../../assets/icons/Change.svg";
+import favouriteIcon from "../../../assets/icons/Favourite.svg";
+import removeIcon from "../../../assets/icons/Delete.svg";
 import styles from "./ContactMenu.module.css";
 
 interface ContactMenuProps {
@@ -54,17 +58,18 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
         className={styles.trigger}
         onClick={() => setIsOpen((previous) => !previous)}
       >
-        <span className={styles.dotIcon} aria-hidden="true">
-          <span />
-          <span />
-          <span />
-        </span>
+        <img src={moreIcon} alt="" className={styles.moreIcon} />
       </IconButton>
 
       {isOpen ? (
         <div className={styles.dropdown} role="menu">
           <button type="button" className={styles.item} role="menuitem" onClick={handleEdit}>
-            Edit
+            <img src={editIcon} alt="" className={styles.itemIcon} />
+            <span>Edit</span>
+          </button>
+          <button type="button" className={styles.item} role="menuitem" disabled>
+            <img src={favouriteIcon} alt="" className={styles.itemIcon} />
+            <span>Favourite</span>
           </button>
           <button
             type="button"
@@ -72,7 +77,8 @@ export function ContactMenu({ onEdit, onRemove }: ContactMenuProps) {
             role="menuitem"
             onClick={handleRemove}
           >
-            Remove
+            <img src={removeIcon} alt="" className={styles.itemIcon} />
+            <span>Remove</span>
           </button>
         </div>
       ) : null}
