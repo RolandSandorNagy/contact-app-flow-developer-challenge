@@ -11,8 +11,21 @@ interface ContactListItemProps {
   onRemove: () => void;
 }
 
+function createTelHref(phone: string) {
+  const trimmedPhone = phone.trim();
+  const hasLeadingPlus = trimmedPhone.startsWith("+");
+  const digits = trimmedPhone.replace(/\D/g, "");
+
+  if (!digits) {
+    return `tel:${trimmedPhone}`;
+  }
+
+  return `tel:${hasLeadingPlus ? `+${digits}` : digits}`;
+}
+
 export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemProps) {
   const avatarSource = contact.avatar ?? defaultAvatarImage;
+  const telHref = contact.phone ? createTelHref(contact.phone) : null;
 
   return (
     <li className={styles.item}>
@@ -22,7 +35,15 @@ export function ContactListItem({ contact, onEdit, onRemove }: ContactListItemPr
 
       <div className={styles.info}>
         <h3 className={styles.name}>{contact.name}</h3>
-        <p className={styles.phone}>{contact.phone || "No phone number"}</p>
+        <p className={styles.phone}>
+          {contact.phone && telHref ? (
+            <a href={telHref} className={styles.phoneLink}>
+              {contact.phone}
+            </a>
+          ) : (
+            "No phone number"
+          )}
+        </p>
       </div>
 
       <div className={styles.actions}>

@@ -49,6 +49,24 @@
   letter-spacing: var(--message-letter);
 }
 
+.phoneLink {
+  color: inherit;
+  text-decoration: none;
+  cursor: var(--cursor-pointer);
+  transition: color 0.15s ease;
+}
+
+.phoneLink:visited,
+.phoneLink:active {
+  color: inherit;
+  text-decoration: none;
+}
+
+.phoneLink:hover {
+  color: var(--fg-80);
+  text-decoration: none;
+}
+
 .actions {
   display: inline-flex;
   align-items: center;
