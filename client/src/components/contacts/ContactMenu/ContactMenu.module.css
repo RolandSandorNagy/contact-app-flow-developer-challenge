@@ -3,21 +3,25 @@
 }
 
 .trigger {
-  width: var(--size-control-lg);
-  height: var(--size-control-lg);
+  width: var(--size-control-md);
+  height: var(--size-control-md);
   border-radius: 12px;
   padding: 8px;
   border: none;
-  background: var(--gray-80);
+  background: transparent;
 }
 
 .trigger:hover {
+  background: var(--gray-80);
+}
+
+.trigger:active {
   background: var(--gray-70);
 }
 
 .moreIcon {
-  width: 20px;
-  height: 20px;
+  width: 14.55px;
+  height: auto;
   object-fit: contain;
   opacity: 0.9;
 }

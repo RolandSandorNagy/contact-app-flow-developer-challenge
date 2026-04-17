@@ -132,16 +132,19 @@
 .backIconImage {
   width: 15.25px;
   height: 15.25px;
+  cursor: var(--cursor-disabled);
 }
 
 .settingsIconImage {
   width: 18.8px;
   height: 19px;
+  cursor: var(--cursor-disabled);
 }
 
 .lightModeIconImage {
   width: 21.5px;
   height: 21.5px;
+  cursor: var(--cursor-pointer)
 }
 
 .headerAvatar {
@@ -162,6 +165,7 @@
   object-fit: cover;
   border: 2px solid #ffffff;
   box-sizing: border-box;
+  cursor: var(--cursor-disabled);
 }
 
 .addButton {
