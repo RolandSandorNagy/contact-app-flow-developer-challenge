@@ -2,6 +2,8 @@
   --center-col: min(720px, calc(100% - 192px));
   --side-col: max(96px, calc((100% - var(--center-col)) / 2));
   --grid-line: var(--color-grid-line);
+  --top-row-height: 96px;
+  --header-row-height: 96px;
 
   position: relative;
   min-height: 100vh;
@@ -32,14 +34,14 @@
     ),
     linear-gradient(
       to bottom,
-      transparent 95px,
-      var(--grid-line) 95px,
-      var(--grid-line) 96px,
-      transparent 96px,
-      transparent 191px,
-      var(--grid-line) 191px,
-      var(--grid-line) 192px,
-      transparent 192px
+      transparent calc(var(--top-row-height) - 1px),
+      var(--grid-line) calc(var(--top-row-height) - 1px),
+      var(--grid-line) var(--top-row-height),
+      transparent var(--top-row-height),
+      transparent calc(var(--top-row-height) + var(--header-row-height) - 1px),
+      var(--grid-line) calc(var(--top-row-height) + var(--header-row-height) - 1px),
+      var(--grid-line) calc(var(--top-row-height) + var(--header-row-height)),
+      transparent calc(var(--top-row-height) + var(--header-row-height))
     );
 }
 
@@ -242,6 +244,8 @@
   .app {
     --side-col: 16px;
     --center-col: calc(100% - 32px);
+    --top-row-height: 72px;
+    --header-row-height: 72px;
     grid-template-rows: 72px 72px minmax(0, 1fr);
   }
 
