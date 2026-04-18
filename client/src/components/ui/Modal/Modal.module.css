@@ -12,32 +12,19 @@
 .modal {
   width: min(364px, 100%);
   background: var(--surface-modal);
-  border-radius: 16px;
+  border-radius: 8px;
   cursor: var(--cursor-default);
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 24px 24px 24px;
-}
-
-.title {
-  font-family: var(--font-heading);
-  font-size: var(--h2-size);
-  line-height: var(--h2-line);
-  font-weight: var(--h2-weight);
-  letter-spacing: var(--h2-letter);
-  color: var(--fg-100);
+  position: relative;
 }
 
 .content {
-  padding: 0 24px 24px;
+  padding: 0;
 }
 
 .closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   width: 26px;
   height: 26px;
   border-radius: 7px;

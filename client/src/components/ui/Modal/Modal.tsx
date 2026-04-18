@@ -1,26 +1,25 @@
-import { useEffect, useId, type ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { IconButton } from "../IconButton/IconButton";
 import styles from "./Modal.module.css";
 
 interface ModalProps {
-  title: string;
   isOpen: boolean;
   onClose: () => void;
   disableClose?: boolean;
   showCloseButton?: boolean;
+  ariaLabelledBy?: string;
   children: ReactNode;
 }
 
 export function Modal({
-  title,
   isOpen,
   onClose,
   disableClose = false,
   showCloseButton = true,
+  ariaLabelledBy,
   children
 }: ModalProps) {
-  const titleId = useId();
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
@@ -60,28 +59,23 @@ export function Modal({
             className={styles.modal}
             role="dialog"
             aria-modal="true"
-            aria-labelledby={titleId}
+            aria-labelledby={ariaLabelledBy}
             onClick={(event) => event.stopPropagation()}
             initial={shouldReduceMotion ? false : { opacity: 0, y: 10, scale: 0.985 }}
             animate={shouldReduceMotion ? {} : { opacity: 1, y: 0, scale: 1 }}
             exit={shouldReduceMotion ? {} : { opacity: 0, y: 8, scale: 0.985 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.2, ease: "easeOut" }}
           >
-            <div className={styles.header}>
-              <h2 id={titleId} className={styles.title}>
-                {title}
-              </h2>
-              {showCloseButton ? (
-                <IconButton
-                  className={styles.closeButton}
-                  onClick={onClose}
-                  disabled={disableClose}
-                  aria-label="Close modal"
-                >
-                  <span className={styles.closeIcon}>x</span>
-                </IconButton>
-              ) : null}
-            </div>
+            {showCloseButton ? (
+              <IconButton
+                className={styles.closeButton}
+                onClick={onClose}
+                disabled={disableClose}
+                aria-label="Close modal"
+              >
+                <span className={styles.closeIcon}>x</span>
+              </IconButton>
+            ) : null}
             <div className={styles.content}>{children}</div>
           </motion.div>
         </motion.div>

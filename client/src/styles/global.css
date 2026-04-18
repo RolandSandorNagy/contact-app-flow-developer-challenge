@@ -86,7 +86,7 @@
   --size-control-lg: 48px;
   --size-list-item: 44px;
   --radius-button: 8px;
-  --radius-control: 10px;
+  --radius-control: 8px;
 
   /* Cursor system (SVG + fallback) */
   --cursor-default: url("../assets/cursors/Default.svg"), default;
@@ -111,17 +111,17 @@
   --h3-size: 16px;
   --h3-line: 24px;
   --h3-weight: 400;
-  --h3-letter: 0.01em;
+  --h3-letter: 0;
 
   --body-size: 14px;
   --body-line: 20px;
   --body-weight: 400;
-  --body-letter: 0.01em;
+  --body-letter: 0;
 
   --message-size: 12px;
   --message-line: 12px;
   --message-weight: 400;
-  --message-letter: 0.01em;
+  --message-letter: 0;
 
   font-family: var(--font-body);
   color: var(--fg-100);

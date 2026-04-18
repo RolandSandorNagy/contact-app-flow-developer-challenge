@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useId, useState, type FormEvent } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Button } from "../../ui/Button/Button";
 import { Input } from "../../ui/Input/Input";
@@ -32,6 +32,7 @@ export function ContactModal({
   onSubmit
 }: ContactModalProps) {
   const shouldReduceMotion = useReducedMotion();
+  const headingId = useId();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -90,11 +91,11 @@ export function ContactModal({
 
   return (
     <Modal
-      title={title}
       isOpen={isOpen}
       onClose={onClose}
       disableClose={isSubmitting}
       showCloseButton={false}
+      ariaLabelledBy={headingId}
     >
       <motion.form
         className={styles.form}
@@ -103,51 +104,62 @@ export function ContactModal({
         initial={shouldReduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <motion.div
-          className={`${styles.section} ${styles.avatarSection}`}
-          variants={itemVariants}
-          transition={itemTransition}
-        >
-          <AvatarPicker avatar={avatar} disabled={isSubmitting} allowRemove onChange={setAvatar} />
-        </motion.div>
+        <div className={styles.contactBlock}>
+          <motion.h2
+            id={headingId}
+            className={styles.title}
+            variants={itemVariants}
+            transition={itemTransition}
+          >
+            {title}
+          </motion.h2>
 
-        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
-          <Input
-            label="Name"
-            value={name}
-            placeholder="Jamie Wright"
-            className={styles.fieldInput}
-            onChange={(event) => setName(event.target.value)}
-            required
-            disabled={isSubmitting}
-          />
-          {nameError ? <p className={styles.error}>{nameError}</p> : null}
-        </motion.div>
+          <motion.div
+            className={`${styles.section} ${styles.avatarSection}`}
+            variants={itemVariants}
+            transition={itemTransition}
+          >
+            <AvatarPicker avatar={avatar} disabled={isSubmitting} allowRemove onChange={setAvatar} />
+          </motion.div>
 
-        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
-          <Input
-            label="Phone number"
-            value={phone}
-            placeholder="+01 234 5678"
-            className={styles.fieldInput}
-            onChange={(event) => setPhone(event.target.value)}
-            disabled={isSubmitting}
-          />
-        </motion.div>
+          <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
+            <Input
+              label="Name"
+              value={name}
+              placeholder="Jamie Wright"
+              className={styles.fieldInput}
+              onChange={(event) => setName(event.target.value)}
+              required
+              disabled={isSubmitting}
+            />
+            {nameError ? <p className={styles.error}>{nameError}</p> : null}
+          </motion.div>
 
-        <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
-          <Input
-            label="Email address"
-            type="email"
-            value={email}
-            placeholder="jamie.wright@mail.com"
-            className={styles.fieldInput}
-            onChange={(event) => setEmail(event.target.value)}
-            disabled={isSubmitting}
-          />
-        </motion.div>
+          <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
+            <Input
+              label="Phone number"
+              value={phone}
+              placeholder="+01 234 5678"
+              className={styles.fieldInput}
+              onChange={(event) => setPhone(event.target.value)}
+              disabled={isSubmitting}
+            />
+          </motion.div>
 
-        <motion.div className={styles.actions} variants={itemVariants} transition={itemTransition}>
+          <motion.div className={styles.section} variants={itemVariants} transition={itemTransition}>
+            <Input
+              label="Email address"
+              type="email"
+              value={email}
+              placeholder="jamie.wright@mail.com"
+              className={styles.fieldInput}
+              onChange={(event) => setEmail(event.target.value)}
+              disabled={isSubmitting}
+            />
+          </motion.div>
+        </div>
+
+        <motion.footer className={styles.footer} variants={itemVariants} transition={itemTransition}>
           <Button
             buttonType="secondary"
             variant="label"
@@ -166,7 +178,7 @@ export function ContactModal({
           >
             {isSubmitting ? "Saving..." : "Done"}
           </Button>
-        </motion.div>
+        </motion.footer>
       </motion.form>
     </Modal>
   );
