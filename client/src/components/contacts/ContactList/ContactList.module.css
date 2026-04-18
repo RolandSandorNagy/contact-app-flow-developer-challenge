@@ -6,10 +6,6 @@
   gap: 0;
 }
 
-.listItem {
-  list-style: none;
-}
-
 .empty {
   color: var(--fg-56);
   font-size: var(--body-size);

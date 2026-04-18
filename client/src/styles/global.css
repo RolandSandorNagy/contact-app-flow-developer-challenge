@@ -201,6 +201,19 @@ body {
   cursor: var(--cursor-default);
 }
 
+@media (hover: none), (pointer: coarse) {
+  :root {
+    --cursor-default: auto;
+    --cursor-pointer: pointer;
+    --cursor-text: text;
+    --cursor-disabled: not-allowed;
+    --cursor-grab: grab;
+    --cursor-grabbing: grabbing;
+    --cursor-zoom-in: zoom-in;
+    --cursor-zoom-out: zoom-out;
+  }
+}
+
 #root {
   min-height: 100vh;
 }

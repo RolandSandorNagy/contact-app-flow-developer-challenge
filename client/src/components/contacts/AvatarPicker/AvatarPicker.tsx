@@ -13,6 +13,9 @@ interface AvatarPickerProps {
   onChange: (nextAvatar: string | null) => void;
 }
 
+const MAX_AVATAR_EDGE = 192;
+const AVATAR_QUALITY = 0.82;
+
 function readImageAsBase64(file: File) {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
@@ -26,6 +29,66 @@ function readImageAsBase64(file: File) {
     reader.onerror = () => reject(new Error("Could not read image."));
     reader.readAsDataURL(file);
   });
+}
+
+function readBlobAsDataUrl(blob: Blob) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+        return;
+      }
+      reject(new Error("Could not process image."));
+    };
+    reader.onerror = () => reject(new Error("Could not process image."));
+    reader.readAsDataURL(blob);
+  });
+}
+
+function loadImageFromUrl(url: string) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error("Could not process image."));
+    image.src = url;
+  });
+}
+
+async function optimizeImageForStorage(file: File) {
+  const objectUrl = URL.createObjectURL(file);
+
+  try {
+    const image = await loadImageFromUrl(objectUrl);
+    const longestEdge = Math.max(image.naturalWidth, image.naturalHeight);
+    const scale = longestEdge > MAX_AVATAR_EDGE ? MAX_AVATAR_EDGE / longestEdge : 1;
+
+    const targetWidth = Math.max(1, Math.round(image.naturalWidth * scale));
+    const targetHeight = Math.max(1, Math.round(image.naturalHeight * scale));
+
+    const canvas = document.createElement("canvas");
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
+    const context = canvas.getContext("2d");
+    if (!context) {
+      throw new Error("Could not process image.");
+    }
+
+    context.drawImage(image, 0, 0, targetWidth, targetHeight);
+
+    const blob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, "image/webp", AVATAR_QUALITY);
+    });
+
+    if (!blob) {
+      return readImageAsBase64(file);
+    }
+
+    return readBlobAsDataUrl(blob);
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
 }
 
 export function AvatarPicker({
@@ -61,7 +124,7 @@ export function AvatarPicker({
 
     try {
       setError(null);
-      const base64 = await readImageAsBase64(file);
+      const base64 = await optimizeImageForStorage(file);
       onChange(base64);
     } catch (readError) {
       setError(readError instanceof Error ? readError.message : "Unable to read image.");

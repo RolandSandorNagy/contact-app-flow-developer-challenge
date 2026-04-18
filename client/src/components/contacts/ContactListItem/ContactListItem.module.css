@@ -73,6 +73,12 @@
   align-items: center;
   flex-shrink: 0;
   gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(2px);
+  transition:
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 .actionIcon {
@@ -92,6 +98,13 @@
   height: 100%;
   object-fit: contain;
   filter: var(--ui-icon-filter);
+}
+
+.item:hover .actions,
+.item:focus-within .actions {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
 }
 
 .item:hover,
@@ -126,8 +139,11 @@
   }
 
   .actions {
+    opacity: 1;
+    pointer-events: auto;
     gap: 4px;
     margin-left: 2px;
+    transform: none;
   }
 
   .actionIcon {

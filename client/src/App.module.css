@@ -19,65 +19,7 @@
     color 0.2s ease;
 }
 
-.themeLight {
-  --gray-100: #f6f7f9;
-  --gray-90: #eef0f3;
-  --gray-80: #e6e9ee;
-  --gray-70: #dce1e8;
-  --gray-60: #cfd6df;
-  --gray-50: #c1c9d4;
-  --gray-40: #aeb8c5;
-  --gray-30: #98a4b4;
-  --gray-20: #7f8ca0;
-  --gray-10: #667486;
-
-  --fg-100: rgba(18, 22, 29, 1);
-  --fg-80: rgba(18, 22, 29, 0.8);
-  --fg-56: rgba(18, 22, 29, 0.56);
-  --fg-32: rgba(18, 22, 29, 0.32);
-
-  --danger-fg: #b92c3d;
-  --danger-fg-strong: #a82535;
-
-  --color-grid-line: #d4dae3;
-  --surface-modal: #f7f8fa;
-  --surface-popover: #eef1f5;
-  --overlay-backdrop: rgba(10, 16, 28, 0.2);
-  --shadow-popover: 0 18px 34px rgba(8, 16, 30, 0.16);
-
-  --input-border: #c7cfda;
-  --input-hover-border: #b9c3d1;
-  --input-focus-border: #9eabbc;
-  --input-bg: #f8f9fb;
-  --input-active-bg: #eceff4;
-  --input-placeholder: rgba(18, 22, 29, 0.42);
-
-  --button-primary-bg: #cfd6df;
-  --button-primary-hover-bg: #c1c9d4;
-  --button-primary-active-bg: #aeb8c5;
-  --button-primary-border: transparent;
-  --button-primary-color: rgba(18, 22, 29, 0.94);
-  --button-primary-hover-border: transparent;
-  --button-primary-active-border: transparent;
-  --button-special-base-layer: linear-gradient(0deg, #e7ebf2, #e7ebf2);
-  --button-special-depth-layer: linear-gradient(180deg, rgba(205, 216, 231, 0.7) 0%, #dde5f0 100%);
-  --button-special-hover-overlay: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.45),
-    rgba(255, 255, 255, 0.45)
-  );
-  --button-special-border-gradient: linear-gradient(
-    180deg,
-    rgba(194, 204, 217, 1) 0%,
-    rgba(194, 204, 217, 0) 100%
-  );
-  --button-special-color: rgba(18, 22, 29, 0.94);
-  --menu-item-hover-bg: rgba(18, 22, 29, 0.05);
-  --menu-item-active-bg: rgba(18, 22, 29, 0.03);
-  --ui-icon-filter: brightness(0) saturate(100%);
-}
-
-.themeLight .headerAvatarImage {
+:global([data-theme="light"]) .headerAvatarImage {
   border-color: rgba(18, 22, 29, 0.72);
 }
 
@@ -237,6 +179,11 @@
   width: 21.5px;
   height: 21.5px;
   cursor: var(--cursor-pointer);
+  transition: transform 0.22s ease-out;
+}
+
+.lightModeIconImageActive {
+  transform: rotate(180deg) scale(1.02);
 }
 
 .headerAvatar {
@@ -264,10 +211,15 @@
   border-radius: 1000px;
   line-height: 1;
   letter-spacing: 0;
+  transition: transform 0.18s ease-out;
 }
 
-.addButtonMotion {
-  display: inline-flex;
+.addButton:hover {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.addButton:active {
+  transform: scale(0.985);
 }
 
 .addPlus {
@@ -426,13 +378,10 @@
     height: 24px;
   }
 
-  .addButtonMotion {
+  .addButton {
     grid-column: 2;
     grid-row: 2;
     justify-self: end;
-  }
-
-  .addButton {
     min-height: 38px;
     min-width: 38px;
     width: 38px;

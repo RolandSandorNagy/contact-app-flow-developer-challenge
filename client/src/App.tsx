@@ -1,5 +1,4 @@
 import { Suspense, lazy, useCallback, useEffect, useState } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import { ContactList } from "./components/contacts/ContactList/ContactList";
 import { Button } from "./components/ui/Button/Button";
 import {
@@ -42,7 +41,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [editingContact, setEditingContact] = useState<Contact | null>(null);
-  const shouldReduceMotion = useReducedMotion();
   const isLightMode = theme === "light";
 
   useEffect(() => {
@@ -128,13 +126,9 @@ function App() {
   };
 
   const themeButtonLabel = isLightMode ? "Switch to dark mode" : "Switch to light mode";
-  const iconMotion = shouldReduceMotion ? {} : { rotate: isLightMode ? 180 : 0, scale: isLightMode ? 1.02 : 1 };
-  const iconMotionTransition = { duration: shouldReduceMotion ? 0 : 0.22, ease: "easeOut" } as const;
-  const addButtonMotion = shouldReduceMotion ? undefined : { y: -1, scale: 1.01 };
-  const addButtonTapMotion = shouldReduceMotion ? undefined : { scale: 0.985 };
 
   return (
-    <div className={`${styles.app} ${isLightMode ? styles.themeLight : ""}`.trim()}>
+    <div className={styles.app}>
       <header className={styles.topBar}>
         <div className={styles.headerLeftCell}>
           <span className={styles.backIcon} aria-hidden="true">
@@ -189,36 +183,30 @@ function App() {
                 aria-label={themeButtonLabel}
                 aria-pressed={isLightMode}
               >
-                <motion.img
+                <img
                   src={lightModeIcon}
                   alt=""
                   width="22"
                   height="22"
-                  className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
-                  animate={iconMotion}
-                  transition={iconMotionTransition}
+                  className={`${styles.headerIconImage} ${styles.lightModeIconImage} ${
+                    isLightMode ? styles.lightModeIconImageActive : ""
+                  }`}
                 />
               </button>
             </div>
 
-            <motion.span
-              className={styles.addButtonMotion}
-              whileHover={addButtonMotion}
-              whileTap={addButtonTapMotion}
+            <Button
+              className={styles.addButton}
+              buttonType="special"
+              variant="labelIcon"
+              onClick={openAddModal}
+              aria-label="Add new contact"
             >
-              <Button
-                className={styles.addButton}
-                buttonType="special"
-                variant="labelIcon"
-                onClick={openAddModal}
-                aria-label="Add new contact"
-              >
-                <span className={styles.addPlus} aria-hidden="true">
-                  <img src={addIcon} alt="" width="24" height="24" className={styles.addPlusIcon} />
-                </span>
-                <span className={styles.addButtonLabel}>Add new</span>
-              </Button>
-            </motion.span>
+              <span className={styles.addPlus} aria-hidden="true">
+                <img src={addIcon} alt="" width="24" height="24" className={styles.addPlusIcon} />
+              </span>
+              <span className={styles.addButtonLabel}>Add new</span>
+            </Button>
           </div>
         </div>
 
@@ -230,14 +218,14 @@ function App() {
             aria-label={themeButtonLabel}
             aria-pressed={isLightMode}
           >
-            <motion.img
+            <img
               src={lightModeIcon}
               alt=""
               width="22"
               height="22"
-              className={`${styles.headerIconImage} ${styles.lightModeIconImage}`}
-              animate={iconMotion}
-              transition={iconMotionTransition}
+              className={`${styles.headerIconImage} ${styles.lightModeIconImage} ${
+                isLightMode ? styles.lightModeIconImageActive : ""
+              }`}
             />
           </button>
         </div>
