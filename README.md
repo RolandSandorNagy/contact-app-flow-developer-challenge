@@ -5,6 +5,13 @@ Full-stack contact management app built for the UX Studio developer challenge, f
 
 The app supports adding, editing, and removing contacts, with avatar upload and responsive layout.
 
+## Design
+The implementation is based on the Figma design provided as part of the challenge.
+
+## Implementation Notes
+- On mobile, some actions were moved into the dropdown to keep interactions usable and avoid overcrowding.
+- A few small UX improvements were added, including a light mode toggle plus interaction polish (animations and desktop cursor behavior).
+
 ## Tech Stack
 - Frontend: React, TypeScript, Vite, CSS Modules
 - Backend: Node.js, Express, SQLite (`sqlite3`)
@@ -64,3 +71,4 @@ Preview URL (default): `http://localhost:4173`
 - Add lightweight API tests for CRUD endpoints.
 - Add search and pagination support for larger contact lists.
 - Add avatar size constraints/compression before storing base64 data.
+- Introduce undo or confirmation for destructive actions
