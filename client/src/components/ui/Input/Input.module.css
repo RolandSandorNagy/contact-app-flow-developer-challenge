@@ -19,7 +19,7 @@
   border: 1px solid var(--input-border);
   padding: 8px 12px;
   font-size: var(--body-size);
-  line-height: var(--body-line);
+  line-height: 18px;
   letter-spacing: var(--body-letter);
   font-weight: var(--body-weight);
   color: var(--fg-100);

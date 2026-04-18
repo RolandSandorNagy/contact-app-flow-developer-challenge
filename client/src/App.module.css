@@ -1,5 +1,5 @@
 .app {
-  --center-col: min(720px, calc(100% - 192px));
+  --center-col: min(768px, calc(100% - 192px));
   --side-col: max(96px, calc((100% - var(--center-col)) / 2));
   --grid-line: var(--color-grid-line);
   --top-row-height: 96px;

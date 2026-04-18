@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IconButton } from "../../ui/IconButton/IconButton";
 import moreIcon from "../../../assets/icons/More.svg";
 import editIcon from "../../../assets/icons/Settings.svg";
@@ -14,9 +14,24 @@ interface ContactMenuProps {
   onOpenChange?: (isOpen: boolean) => void;
 }
 
+const DROPDOWN_WIDTH = 219;
+const VIEWPORT_GUTTER = 8;
+
 export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownSide, setDropdownSide] = useState<"left" | "right">("left");
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const updateDropdownSide = useCallback(() => {
+    const triggerRect = menuRef.current?.getBoundingClientRect();
+    if (!triggerRect) {
+      return;
+    }
+
+    const fitsToRight = triggerRect.left + DROPDOWN_WIDTH + VIEWPORT_GUTTER <= window.innerWidth;
+    setDropdownSide(fitsToRight ? "left" : "right");
+  }, []);
+
   const closeMenu = useCallback(() => {
     setIsOpen(false);
     onOpenChange?.(false);
@@ -29,6 +44,24 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
       return next;
     });
   }, [onOpenChange]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    updateDropdownSide();
+  }, [isOpen, updateDropdownSide]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleResize = () => updateDropdownSide();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isOpen, updateDropdownSide]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -71,14 +104,18 @@ export function ContactMenu({ onEdit, onRemove, onOpenChange }: ContactMenuProps
         aria-label="Contact actions"
         aria-expanded={isOpen}
         aria-haspopup="true"
-        className={styles.trigger}
+        className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ""}`}
         onClick={toggleMenu}
       >
         <img src={moreIcon} alt="" width="15" height="15" className={styles.moreIcon} />
       </IconButton>
 
       {isOpen ? (
-        <div className={styles.dropdown}>
+        <div
+          className={`${styles.dropdown} ${
+            dropdownSide === "left" ? styles.dropdownLeft : styles.dropdownRight
+          }`}
+        >
           <button type="button" className={`${styles.item} ${styles.mobileOnlyItem}`} disabled>
             <img src={muteIcon} alt="" width="20" height="20" className={styles.itemIcon} />
             <span>Mute</span>

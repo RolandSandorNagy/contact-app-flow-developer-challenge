@@ -11,12 +11,16 @@
   background: transparent;
 }
 
+.triggerOpen {
+  background: #1e1e1e;
+}
+
 .trigger:hover {
-  background: var(--gray-80);
+  background: var(--gray-90);
 }
 
 .trigger:active {
-  background: var(--gray-70);
+  background: var(--gray-80);
 }
 
 .moreIcon {
@@ -30,16 +34,23 @@
 .dropdown {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
-  max-width: 219px;
-  width: max-content;
-  border-radius: 14px;
+  width: 219px;
+  border-radius: 8px;
   background: var(--surface-popover);
-  box-shadow: var(--shadow-popover);
   z-index: 12;
   overflow: hidden;
   transform-origin: top right;
   animation: dropdownIn 0.14s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dropdownLeft {
+  left: 0;
+  right: auto;
+}
+
+.dropdownRight {
+  right: 0;
+  left: auto;
 }
 
 .item {

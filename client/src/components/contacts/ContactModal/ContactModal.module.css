@@ -46,18 +46,18 @@
   border-radius: var(--radius-control);
   border: none;
   border-color: transparent;
-  background-color: var(--button-primary-bg);
+  background-color: var(--button-modal-primary-bg);
   color: var(--button-primary-color);
 }
 
 .doneButton:hover:not(:disabled) {
-  background-color: var(--button-primary-hover-bg);
+  background-color: var(--button-modal-primary-hover-bg);
   border: none;
   border-color: transparent;
 }
 
 .doneButton:active:not(:disabled) {
-  background-color: var(--button-primary-active-bg);
+  background-color: var(--button-modal-primary-active-bg);
   border: none;
   border-color: transparent;
 }

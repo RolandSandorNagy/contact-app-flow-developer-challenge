@@ -27,6 +27,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border: 1px solid var(--color-grid-line);
+  border-radius: 50%;
 }
 
 .info {
@@ -45,7 +47,7 @@
 .phone {
   color: var(--fg-56);
   font-size: var(--message-size);
-  line-height: var(--message-line);
+  line-height: 16px;
   font-weight: var(--message-weight);
   letter-spacing: var(--message-letter);
 }
