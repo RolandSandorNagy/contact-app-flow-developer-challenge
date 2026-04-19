@@ -10,7 +10,8 @@ The implementation is based on the Figma design provided as part of the challeng
 
 ## Implementation Notes
 - On mobile, some actions were moved into the dropdown to keep interactions usable and avoid overcrowding.
-- A few small UX improvements were added, including a light mode toggle plus interaction polish (animations and desktop cursor behavior).
+- A few small UX improvements were added, including a light mode toggle and interaction polish (animations and desktop cursor behavior).
+- Minor implementation adjustments were made to better match the intended visual result and ensure proper behavior across different screen sizes.
 
 ## Tech Stack
 - Frontend: React, TypeScript, Vite, CSS Modules
@@ -39,6 +40,18 @@ cd client
 npm run dev
 ```
 Frontend URL (default): `http://localhost:5173`
+
+## Configuration
+- `PORT` (optional): backend port, defaults to `4000`.
+- Backend JSON body limit is set to `10mb` (to support base64 avatar payloads).
+
+## API
+- `GET /api/health` -> returns `{ "status": "ok" }`
+- `GET /api/contacts` -> list contacts
+- `POST /api/contacts` -> create contact (`name` required)
+- `PUT /api/contacts/:id` -> update contact
+- `DELETE /api/contacts/:id` -> delete contact (`204` on success)
+- Common error responses: `400` (validation/invalid id), `404` (not found), `500` (server error)
 
 ### Lighthouse check (recommended)
 For reliable Lighthouse scores, run the frontend in production preview mode instead of `npm run dev`:
